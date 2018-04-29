@@ -1,0 +1,234 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Interface.master.cs" Inherits="Interface" %>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head runat="server">
+<asp:ContentPlaceHolder ID="Scripting" runat="server"></asp:ContentPlaceHolder>
+	<meta charset="utf-8">
+	<title>Dashboard</title>
+	
+	<!-- Stylesheets -->
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
+	<link rel="stylesheet" href="css/style.css">
+	
+	<!-- Optimize for mobile devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	<!-- jQuery & JS files -->
+		<link rel="stylesheet" href="css/cmxform.css">
+	
+    <script type="text/javascript">
+        function SelectName11(url) {
+
+            window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=425,height=330,left=490,top=300');
+
+
+        }
+    </script>
+     <script type = "text/javascript">
+         function isNumeric(keyCode) {
+             return ((keyCode >= 48 && keyCode <= 57) || keyCode == 8 || (keyCode >= 96 && keyCode <= 105))
+         }
+    </script>
+    <script type = "text/javascript">
+        function isAlpha(keyCode) {
+            return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8)
+        }
+    </script> 
+    <script type = "text/javascript">
+        function isAlphaNumeric(keyCode) {
+            return ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || keyCode == 8)
+        }
+    </script>
+<script>
+    $(document).ready(function () {
+        // SUCCESS AJAX CALL, replace "success: false," by:     success : function() { callSuccessFunction() }, 
+        /*	jQuery(document).bind('keydown', 'Ctrl+s',function() {
+        $('#form1').submit();
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+a',function() {
+        window.location = "";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+u',function() {
+        window.location = "add_supplier.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+0',function() {
+        window.location = "dashboard.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+1',function() {
+        window.location = "add_purchase.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+2',function() {
+        window.location = "add_stock.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+3',function() {
+        window.location = "add_sales.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+4',function() {
+        window.location = "add_category.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+5',function() {
+        window.location = "add_supplier.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+6',function() {
+        window.location = "add_customer.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+7',function() {
+        window.location = "view_product.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+8',function() {
+        window.location = "view_sales.php";
+        return false;
+        });
+        jQuery(document).bind('keydown', 'Ctrl+9',function() {
+        window.location = "view_purchase.php";
+        return false;
+        });
+			
+        */
+
+        //$.validationEngine.loadValidation("#date")
+        //alert($("#formID").validationEngine({returnIsValid:true}))
+        //$.validationEngine.buildPrompt("#date","This is an example","error")	 		 // Exterior prompt build example								 // input prompt close example
+        //$.validationEngine.closePrompt(".formError",true) 							// CLOSE ALL OPEN PROMPTS
+    });
+	</script>
+
+	
+   
+</head>
+<body>
+
+<form id="forms1" runat="server">
+	<!-- TOP BAR -->
+
+<!-- TOP BAR -->
+	<div id="top-bar">
+		
+		<div class="page-full-width cf">
+
+			<ul id="nav" class="fl">
+	
+				
+				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong><%=Session["logged_in"].ToString() %></strong></a>
+					
+				</li>
+               
+                
+           
+             
+               
+				<li><a href="#" onclick="SelectName11('AddGroup.aspx'); return false;"  class="round button dark menu-settings image-left">Create Ledger Group</a></li>
+				
+			</ul> <!-- end nav -->
+
+					
+			                                  <a 
+                 class="round button dark menu-logoff image-left" 
+                style="background-color: #cc0000" href="Login.aspx?id=1">Log Out</a>
+				
+
+		</div> <!-- end full-width -->	
+	
+	</div> <!-- end top-bar -->	<!-- end top-bar -->
+	<script>
+	    (function (i, s, o, g, r, a, m) {
+	        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+	            (i[r].q = i[r].q || []).push(arguments)
+	        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+	    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+	    ga('create', 'UA-41950762-1', 'posnic.com');
+	    ga('send', 'pageview');
+
+</script>	
+		<!-- HEADER -->
+	<div id="header-with-tabs">
+		
+		<div class="page-full-width cf">
+	
+			<ul id="tabs" class="fl">
+            <asp:Panel ID="panmainadmin" runat="server">
+            
+				<li><a href="MainAdmin.aspx" class="active-tab dashboard-tab" >Dashboard</a></li>
+                <li><a href="Data_Entry_Home.aspx" class="payment-tab">Data Entry</a></li>
+                <%-- <%if (Session["menu"].ToString() != "3") %>
+            <%{ %>--%>
+				<li><a href="Project.aspx" class="sales-tab">Project</a></li>
+				<li><a href="Project_User.aspx" class=" customers-tab">User</a></li>
+				<li><a href="Task.aspx" class=" customers-tab">Schedule Task</a></li>
+				<li><a href="Usage_Home.aspx" class=" supplier-tab">Usage</a></li>
+				<li><a href="Complex_Home.aspx" class=" stock-tab">Complex</a></li>
+                <li><a href="Customer.aspx" class="sales-tab">Customers</a></li>
+                <li><a href="BS_P_L.aspx" class="report-tab">BS/ P & L</a></li>
+              <%--  <%} %>--%>
+                               
+				</asp:Panel>
+                <asp:Panel ID="panuser" runat="server">
+                	<li><a href="User.aspx" class="active-tab dashboard-tab">Dashboard</a></li>
+				<li><a href="view_sales.php" class="sales-tab">Data Entry</a></li>
+				</asp:Panel>
+                <asp:Panel ID="panadmin" runat="server">
+				<li><a href="ProjectAdmin.aspx" class="active-tab dashboard-tab">Dashboard</a></li>
+                <li><a href="Data_Entry.aspx" class="payment-tab">Data Entry</a></li>
+				<li><a href="view_sales.php" class="sales-tab">Project</a></li>
+				<li><a href="view_customers.php" class=" customers-tab">User</a></li>
+				<li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
+				<li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
+				<li><a href="view_product.php" class=" stock-tab">Reports</a></li>
+				<li><a href="view_report.php" class="report-tab">BankBook</a></li>
+                <li><a href="view_sales.php" class="sales-tab">Customers</a></li>
+				</asp:Panel>
+            
+			</ul> <!-- end tabs -->
+			
+			<!-- Change this image to your own company's logo -->
+			<!-- The logo will automatically be resized to 30px height. -->
+                                                                        <a href="#" id="company-branding-small" class="fr"><img src="upload/geobram -frnt.png" alt="Point of Sale" /></a>
+
+			
+		</div> <!-- end full-width -->	
+
+	</div> <!-- end header -->
+	
+	
+	
+	<!-- MAIN CONTENT -->
+	<div id="content">
+		
+		<div class="page-full-width cf">
+
+			<asp:ContentPlaceHolder ID="side" runat="server"></asp:ContentPlaceHolder>            
+			<asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder> <!-- end full-width -->
+			
+                </div>
+            </div>
+        <div>
+     
+        </div>
+	
+	<!-- FOOTER -->
+	<div id="footer">
+	<h4 style="font-family: Georgia;     font-weight: bold; font-size:15px; color: #0060BF">
+©2015 Copyright. All rights reserved.
+
+
+	</div> <!-- end footer -->
+    </form>
+</body>
+</html>
