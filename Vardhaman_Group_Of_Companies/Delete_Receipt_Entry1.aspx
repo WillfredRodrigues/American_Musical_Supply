@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Delete_Receipt_Entry1.aspx.cs" Inherits="Delete_Receipt_Entry1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Delete_Receipt_Entry1.aspx.cs" Inherits="Delete_Receipt_Entry1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Scripting" Runat="Server">
 <script type="text/javascript">
@@ -12,21 +12,18 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" Runat="Server">
  <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
-         <%if (Session["rightView"].ToString() == "1") %>
+         <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
-           <li><a href="Data_Entry_Home.aspx" class="active-tab dashboard-tab">Day Book</a></li>
+            <li><a href="Receipt_Entry.aspx" class="active-tab dashboard-tab">Create Receipt</a></li>
             <%} %>
-            <%if (Session["rightinsert"].ToString() == "1") %>
+            <%if (Session["rightdelete"].ToString() == "1") %>
             <%{ %>
-            <li><a href="Purchase_Home.aspx" class="purchase-tab">Purchase</a></li>
-             <li><a href="Sales_Home.aspx" class="purchase-tab">Sales</a></li>
-            <li><a href="Payment_Entry.aspx" class="active-tab dashboard-tab">Payment</a></li>
-            <li><a href="Receipt_Entry.aspx" class="active-tab dashboard-tab">Receipt</a></li>
-            <li><a href="Contra.aspx" class="active-tab dashboard-tab">Contra</a></li>
-            <li><a href="Journal.aspx" class="active-tab dashboard-tab">Journal</a></li>
+            <li><a href="Delete_Receipt_Entry.aspx" class="active-tab dashboard-tab">Delete Receipt</a></li>
             <%} %>
+             <li><a href="Data_Entry_Home.aspx" class="active-tab dashboard-tab">Data Entry</a></li>
         </ul>
     </div>
 </asp:Content>
@@ -36,9 +33,12 @@
            
   <div class="side-content fr">
         <div class="content-module">
-            <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Delete Receipt Information</u></b></font></center></div>
-        <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
               

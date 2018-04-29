@@ -77,7 +77,7 @@ public partial class Create_Project : System.Web.UI.Page
             q4 = e1 + "_" + "Purchase";
             q5 = e1 + "_" + "Contra";
             q6 = e1 + "_" + "Usage";
-            string strq = "insert into Project_Registration values('" + e1 + "','" + txtprojname.Text + "','" + e1 + "','" + txtprojlocation.Text + "','"+DateTime.Now+"','','Active','','"+des.InnerText+"')";
+            string strq = "insert into Project_Registration values('" + e1 + "','" + txtprojname.Text + "','" + e1 + "','" + txtprojlocation.Text + "','" + DateTime.Now + "','','Active','','" + q1 + "','" + q2 + "','" + q3 + "','" + q4 + "','" + q5 + "','" + q6 + "','"+des.InnerText+"')";
             SqlCommand cmd1 = new SqlCommand(strq, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd1);
             DataSet ds = new DataSet();
@@ -98,16 +98,10 @@ public partial class Create_Project : System.Web.UI.Page
             table(strQuery5, "Contra");
             string strQuery6 = "create table " + (e1 + "_" + "material") + "(id varchar(50),name varchar(50),quantity int,type varchar(50))";
             table(strQuery6, "material");
-            string strQuery7 = "create table " + (e1 + "_" + "ledger_account") + "(id varchar(50),name varchar(50),ledger_id varchar(50),ledger_name varchar(50),coming_from varchar(50),type varchar(50),balance money,main_id int,main_name varchar(100))";
+            string strQuery7 = "create table " + (e1 + "_" + "ledger_account") + "(id varchar(50),name varchar(50),ledger_id varchar(50),ledger_name varchar(50),coming_from varchar(50),type varchar(50),balance money)";
             table(strQuery7, "ledger_account");
-            string strQuery8 = "create table " + (e1 + "_" + "account") + "(ac_id varchar(50),ac_name varchar(100),balance money,ledger_id varchar(50),ledger_name varchar(50),main_id int,main_name varchar(100))";
+            string strQuery8 = "create table " + (e1 + "_" + "account") + "(ac_id varchar(50),ac_name varchar(100),balance money,ledger_id varchar(50),ledger_name varchar(50))";
             table(strQuery8, "account");
-            string strQuery9 = "create table " + (e1 + "_" + "Journal") + "(ident int identity,pay_id varchar(50),date varchar(50),account varchar(50),name varchar(50),amount money,chk_no varchar(50),chk_date varchar(50),bank_name varchar(50),debit money,credit money,balance money,narration varchar(max),description varchar(max),type varchar(50))";
-            table(strQuery9, "Journal");
-            string strQuery10 = "create table " + (e1 + "_" + "Sales") + "(ident int identity,purchase_id varchar(50),material_name varchar(50),quantity int,quantity_type varchar(50),rate money,amount money,vendor_name varchar(50),vendor_address varchar(max),vendor_mobile varchar(50),purchased_by varchar(50),paid money,balance money,mode_of_pay varchar(50),chk_dd_no int,chk_dd_date varchar(50),bank_name varchar(50),type_of_purchase varchar(50),purchase_date varchar(50),purchase_entry_date varchar(50),challan varchar(50),bill varchar(50),comment varchar(max))";
-            table(strQuery10, "Sales");
-            string strQuery11 = "create table " + (e1 + "_" + "Task") + "(id int identity,description varchar(max),name varchar(200),from_d varchar(50),to_d varchar(50),assigned varchar(50),under int,status int)";
-            table(strQuery11, "Task");
             Response.Redirect("Create_Project.aspx?success=true");
         }
     }

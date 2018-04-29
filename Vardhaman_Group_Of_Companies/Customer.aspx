@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Customer.aspx.cs" Inherits="Customer" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Customer.aspx.cs" Inherits="Customer" %>
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.SqlClient" %>
@@ -7,7 +7,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" Runat="Server">
 <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightview"].ToString() == "1") %>
             <%{ %>
@@ -34,9 +35,12 @@
 
  <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Customer Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
 
@@ -86,7 +90,7 @@
                 </tr>
                
                 <%int i = 1; %>
-                <% string s = "select cust_name,cust_mobile1,cust_booking_date,flat_floor,flat_no,flat_type,flat_area,total,paid,balance from "+val1+" order by cust_booking_date desc";%>
+                <% string s = "select cust_name,cust_mobile1,cust_booking_date,flat_floor,flat_no,flat_type,flat_area,total,paid,balance from "+val1+"";%>
                 <%String strConnString = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString; %>
                 <%SqlConnection con = new SqlConnection(strConnString); %>
                 <% con.Open(); %>
@@ -177,7 +181,7 @@
                 </tr>
                
                 <%int i = 1; %>
-                <% string s = "select cust_name,cust_mobile1,cust_booking_date,flat_floor,flat_no,flat_type,flat_area,total,paid,balance from " + val1 + " where cust_name like '%" + cn.Text + "%' or cust_mobile1 like '%" + cn.Text + "%' or cust_mobile2 like '%" + cn.Text + "%' or cust_address_current like '%" + cn.Text + "%' or cust_address_permanent like '%" + cn.Text + "%' or cust_email like '%" + cn.Text + "%' or cust_booking_date like '%" + cn.Text + "%' or complex_name like '%" + cn.Text + "%' or building_id like '%" + cn.Text + "%' or building_no like '%" + cn.Text + "%' or building_name like '%" + cn.Text + "%' or wing like '%" + cn.Text + "%' or flat_floor like '%" + cn.Text + "%' or flat_no like '%" + cn.Text + "%' or flat_type like '%" + cn.Text + "%' or flat_area like '%" + cn.Text + "%' order by cust_booking_date desc";%>
+                <% string s = "select cust_name,cust_mobile1,cust_booking_date,flat_floor,flat_no,flat_type,flat_area,total,paid,balance from " + val1 + " where cust_name like '%" + cn.Text + "%' or cust_mobile1 like '%" + cn.Text + "%' or cust_mobile2 like '%" + cn.Text + "%' or cust_address_current like '%" + cn.Text + "%' or cust_address_permanent like '%" + cn.Text + "%' or cust_email like '%" + cn.Text + "%' or cust_booking_date like '%" + cn.Text + "%' or complex_name like '%" + cn.Text + "%' or building_id like '%" + cn.Text + "%' or building_no like '%" + cn.Text + "%' or building_name like '%" + cn.Text + "%' or wing like '%" + cn.Text + "%' or flat_floor like '%" + cn.Text + "%' or flat_no like '%" + cn.Text + "%' or flat_type like '%" + cn.Text + "%' or flat_area like '%" + cn.Text + "%'";%>
                 <%String strConnString = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString; %>
                 <%SqlConnection con = new SqlConnection(strConnString); %>
                 <% con.Open(); %>

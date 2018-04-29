@@ -1,11 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true"
     CodeFile="Update_Complex1.aspx.cs" Inherits="Update_Complex1" %>
       <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Scripting" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" runat="Server">
     <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
             <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -32,9 +33,12 @@ EnablePageMethods = "true">
 </cc1:AutoCompleteExtender>
     <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Update Complex Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
             </div><center>     
@@ -54,8 +58,6 @@ EnablePageMethods = "true">
                     </td>
                     <td>
                         <asp:TextBox ID="cn" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-            runat="server" ErrorMessage="Required" ControlToValidate="cn" ForeColor="Red"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -64,8 +66,6 @@ EnablePageMethods = "true">
                     </td>
                     <td>
                         <asp:TextBox ID="cl" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="cl" ForeColor="Red"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -74,8 +74,6 @@ EnablePageMethods = "true">
                     </td>
                     <td>
                         <asp:TextBox ID="bn" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ControlToValidate="bn" ForeColor="Red"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                

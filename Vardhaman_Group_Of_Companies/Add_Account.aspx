@@ -31,12 +31,9 @@ EnablePageMethods = "true">
 </cc1:AutoCompleteExtender>
     <table><tr><td>
                 New Bank Account:&nbsp;&nbsp;
-               
             </td>
             <td>
                 <asp:TextBox  Text="" ID="txtba" runat="server" ClientIDMode="Static" AutoComplete="off"></asp:TextBox>
-                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtba" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:HiddenField ID="txttt" runat="server" />
             </td>
             </tr>
@@ -45,15 +42,13 @@ EnablePageMethods = "true">
                 Openning Balance:&nbsp;&nbsp;
             </td>
             <td>
-                <asp:TextBox  Text="" ID="txtbal" runat="server" ClientIDMode="Static" AutoComplete="off" ></asp:TextBox>
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ForeColor="Red" ControlToValidate="txtbal"></asp:RequiredFieldValidator>
+                <asp:TextBox  Text="" ID="txtbal" runat="server" ClientIDMode="Static" AutoComplete="off"></asp:TextBox>
+                <asp:HiddenField ID="HiddenField1" runat="server" />
             </td>
         </tr>
         <tr><td>Select Sub Group:&nbsp;</td>
-        <td><asp:TextBox ID="txt" runat="server"></asp:TextBox> <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-            runat="server" ErrorMessage="Required" ControlToValidate="txt" ForeColor="Red"></asp:RequiredFieldValidator></td></tr>
-     <tr><td>&nbsp;</td></tr>
+        <td><asp:TextBox ID="txt" runat="server"></asp:TextBox></td></tr>
+     <tr><td colspan="2"><p style="color:Red; text-transform:capitalize">If no sub group is selected,the new group will be considered as master group</p></td></tr>
         <tr>
             <td colspan="2">
                 <center>
@@ -63,9 +58,6 @@ EnablePageMethods = "true">
             </td>
         </tr>
 </table>
-  <asp:TextBox AutoComplete="off" ID="TextBox1" runat="server" Visible="false"></asp:TextBox>
-        <asp:TextBox AutoComplete="off" ID="TextBox2" runat="server" Visible="false" ></asp:TextBox>
-          <asp:TextBox AutoComplete="off" ID="TextBox3" runat="server" Visible="false"></asp:TextBox>
     </form>
 </body>
 </html>

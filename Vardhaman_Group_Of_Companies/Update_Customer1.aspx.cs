@@ -163,7 +163,35 @@ public partial class Update_Customer1 : System.Web.UI.Page
                 con2.Close();
                 con2.Dispose();
             }
-            
+            flatno.Items.Clear();
+            flatno.AppendDataBoundItems = true;
+            flatno.Items.Add("---Select Flat No---");
+            string s7 = "select distinct(flat_no) from  " + val2 + "";
+            String strConnString7 = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString;
+            SqlConnection con7 = new SqlConnection(strConnString7);
+            SqlCommand cmd7 = new SqlCommand();
+
+            cmd7.Parameters.AddWithValue("@id", floor.SelectedItem.Text);
+            cmd7.CommandType = CommandType.Text;
+            cmd7.CommandText = s7;
+            cmd7.Connection = con7;
+            try
+            {
+                con7.Open();
+                flatno.DataSource = cmd7.ExecuteReader();
+                flatno.DataTextField = "flat_no";
+
+                flatno.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con7.Close();
+                con7.Dispose();
+            }
            
         }
          a = Request.QueryString["id"];
@@ -225,35 +253,6 @@ public partial class Update_Customer1 : System.Web.UI.Page
                      
                  }
                  dr.Close();
-                 flatno.Items.Clear();
-                 flatno.AppendDataBoundItems = true;
-                 flatno.Items.Add("---Select Flat No---");
-                 string s7 = "select distinct(flat_no) from  " + val2 + " where complex_name='" + p + "' and building_name='" + q + "' and wing='" + r + "' and flat_floor='" + s + "' ";
-                 String strConnString7 = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString;
-                 SqlConnection con7 = new SqlConnection(strConnString7);
-                 SqlCommand cmd7 = new SqlCommand();
-
-                 cmd7.Parameters.AddWithValue("@id", floor.SelectedItem.Text);
-                 cmd7.CommandType = CommandType.Text;
-                 cmd7.CommandText = s7;
-                 cmd7.Connection = con7;
-                 try
-                 {
-                     con7.Open();
-                     flatno.DataSource = cmd7.ExecuteReader();
-                     flatno.DataTextField = "flat_no";
-
-                     flatno.DataBind();
-                 }
-                 catch (Exception ex)
-                 {
-                     throw ex;
-                 }
-                 finally
-                 {
-                     con7.Close();
-                     con7.Dispose();
-                 }
                  k = complex.Items.IndexOf(((ListItem)complex.Items.FindByText(p)));
                 complex.SelectedIndex = k;
                l = building.Items.IndexOf(((ListItem)building.Items.FindByText(q)));
@@ -278,22 +277,6 @@ public partial class Update_Customer1 : System.Web.UI.Page
         }
     protected void btnSub_Click(object sender, EventArgs e)
     {
-        if (txtam1.Value == "")
-        {
-            txtam1.Value = txttotal.Text;
-        }
-        if (txtam.Value == "")
-        {
-            txtam.Value = txtamount.Text;
-        }
-        if (hocr.Value == "")
-        {
-            hocr.Value = ocr.Text;
-        }
-        if (hem.Value == "")
-        {
-            hem.Value = em.Text;
-        }
         if (cname.Value == "")
         {
            
@@ -306,11 +289,11 @@ public partial class Update_Customer1 : System.Web.UI.Page
                              .ConnectionStrings["conString"].ConnectionString;
                 SqlConnection con = new SqlConnection(strConnString);
                 con.Open();
-                string strq10000 = "update  " + val44 + "  set balance=balance-'" + total.Value + "' where name='" + txtname.Text + "' and type='Customer'";
+                string strq10000 = "update  " + val44 + "  set balance=balance-'" + txttotal.Text + "' where name='" + txtname.Text + "'";
                 SqlCommand cmd10000 = new SqlCommand(strq10000, con);
                 SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
                 DataSet ds10000 = new DataSet();
-                da10000.Fill(ds10000, val44);
+                da10000.Fill(ds10000, val45);
                 string strquery = "select paid from " + val + " where cust_id='" + a + "'";
                 String strConnString1 = System.Configuration.ConfigurationManager
            .ConnectionStrings["conString"].ConnectionString;
@@ -323,8 +306,7 @@ public partial class Update_Customer1 : System.Web.UI.Page
                 {
                     paid = dr.GetValue(0).ToString();
                 }
-
-                string strq11 = "update  " + val + "  set cust_name='" + txtname.Text + "',cust_mobile1='" + txtmob1.Text + "',cust_mobile2='" + txtmob2.Text + "',cust_address_current='" + txtcaddress.InnerText + "',cust_address_permanent='" + txtpaddress.InnerText + "',cust_email='" + txtemail.Text + "',cust_booking_date='" + txtbdate.Text + "',complex_id='" + complex.SelectedItem.Value + "',complex_name='" + complex.SelectedItem.Text + "',building_id='" + building.SelectedItem.Value + "',building_name='" + building.SelectedItem.Text + "',wing='" + wing.SelectedItem.Text + "',flat_floor='" + floor.SelectedItem.Text + "',flat_no='" + flatno.SelectedItem.Text + "',flat_type='" + txtflattype.Text + "',flat_area='" + txtarea.Text + "',rate='" + txtrate.Text + "',amount='" + txtam.Value + "',dev_charge='" + txtdevchrg.Text + "',society_charge='" + txtsctchrg.Text + "',stvat='" + txtstvat.Text + "',agreement_tax='" + txtagree.Text + "',document_charge='" + txtdocu.Text + "',maintenance='" + txtmain10.Text + "',stamp_duty='" + txtduty.Text + "',other='" + txtother.Text + "',total='" + txtam1.Value + "',balance='" + (Convert.ToDouble(txtam1.Value) + Convert.ToDouble(paid)) + "',agree_value='" + av.Text + "',ocr='" + hocr.Value + "',em='" + hem.Value + "',loan='" + loan.Text + "',comment='" + txtcomment.InnerText + "' where cust_id='" + a + "'";
+                string strq11 = "update  " + val + "  set cust_name='" + txtname.Text + "',cust_mobile1='" + txtmob1.Text + "',cust_mobile2='" + txtmob2.Text + "',cust_address_current='" + txtcaddress.InnerText + "',cust_address_permanent='" + txtpaddress.InnerText + "',cust_email='" + txtemail.Text + "',cust_booking_date='" + txtbdate.Text + "',complex_id='" + complex.SelectedItem.Value + "',complex_name='" + complex.SelectedItem.Text + "',building_id='" + building.SelectedItem.Value + "',building_name='" + building.SelectedItem.Text + "',wing='" + wing.SelectedItem.Text + "',flat_floor='" + floor.SelectedItem.Text + "',flat_no='" + flatno.SelectedItem.Text + "',flat_type='" + txtflattype.Text + "',flat_area='" + txtarea.Text + "',rate='" + txtrate.Text + "',amount='" + txtam.Value + "',dev_charge='" + txtdevchrg.Text + "',society_charge='" + txtsctchrg.Text + "',stvat='" + txtstvat.Text + "',agreement_tax='" + txtagree.Text + "',document_charge='" + txtdocu.Text + "',maintenance='" + txtmain10.Text + "',stamp_duty='" + txtduty.Text + "',other='" + txtother.Text + "',total='" + txtam1.Value + "',balance='" + (Convert.ToDouble(txttotal.Text) + Convert.ToDouble(paid)) + "',agree_value='" + av.Text + "',ocr='" + hocr.Value + "',em='" + hem.Value + "',loan='" + loan.Text + "',comment='" + txtcomment.InnerText + "' where cust_id='" + a + "'";
                 SqlCommand cmd111 = new SqlCommand(strq11, con);
                 SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
                 DataSet ds11 = new DataSet();
@@ -334,7 +316,7 @@ public partial class Update_Customer1 : System.Web.UI.Page
                 SqlDataAdapter da3 = new SqlDataAdapter(cmd31);
                 DataSet ds3 = new DataSet();
                 da3.Fill(ds3, val2);
-                string strq2 = "update  " + val44 + "  set name='" + txtname.Text + "',balance=balance+'" + (Convert.ToDouble(txtam1.Value)) + "' where id='" + a + "' and type='Customer'";
+                string strq2 = "update  " + val44 + "  set name='" + txtname.Text + "',balance=balance+'" + (Convert.ToDouble(txttotal.Text)) + "' where id='" + a + "'";
                 SqlCommand cmd21 = new SqlCommand(strq2, con);
                 SqlDataAdapter da2 = new SqlDataAdapter(cmd21);
                 DataSet ds2 = new DataSet();
@@ -351,103 +333,7 @@ public partial class Update_Customer1 : System.Web.UI.Page
                              .ConnectionStrings["conString"].ConnectionString;
                 SqlConnection con = new SqlConnection(strConnString);
                 con.Open();
-                string strq10000 = "update  " + val44 + "  set balance=balance-'" + total.Value + "' where name='" + txtname.Text + "' and type='Customer'";
-                SqlCommand cmd10000 = new SqlCommand(strq10000, con);
-                SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
-                DataSet ds10000 = new DataSet();
-                da10000.Fill(ds10000, val44);
-                string strquery = "select paid from " + val + " where cust_id='" + a + "'";
-                String strConnString1 = System.Configuration.ConfigurationManager
-           .ConnectionStrings["conString"].ConnectionString;
-                SqlConnection con1 = new SqlConnection(strConnString1);
-                con1.Open();
-                SqlDataReader dr;
-                SqlCommand cmd = new SqlCommand(strquery, con1);
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    paid = dr.GetValue(0).ToString();
-                }
-                string strq8 = "update  " + val2 + "  set cust_name='',cust_id='',date='' where complex_name='" + cn.Value + "' and building_name='" + bn.Value + "' and wing='" + wingn.Value + "' and flat_floor='" + floorn.Value + "' and flat_no='" + flatnon.Value + "'";
-                SqlCommand cmd81 = new SqlCommand(strq8, con);
-                SqlDataAdapter da8 = new SqlDataAdapter(cmd81);
-                DataSet ds8 = new DataSet();
-                da8.Fill(ds8, val2);
-                string strq11 = "update  " + val + "  set cust_name='" + txtname.Text + "',cust_mobile1='" + txtmob1.Text + "',cust_mobile2='" + txtmob2.Text + "',cust_address_current='" + txtcaddress.InnerText + "',cust_address_permanent='" + txtpaddress.InnerText + "',cust_email='" + txtemail.Text + "',cust_booking_date='" + txtbdate.Text + "',complex_id='" + complex.SelectedItem.Value + "',complex_name='" + complex.SelectedItem.Text + "',building_id='" + building.SelectedItem.Value + "',building_name='" + building.SelectedItem.Text + "',wing='" + wing.SelectedItem.Text + "',flat_floor='" + floor.SelectedItem.Text + "',flat_no='" + flatno.SelectedItem.Text + "',flat_type='" + txtflattype.Text + "',flat_area='" + txtarea.Text + "',rate='" + txtrate.Text + "',amount='" + txtam.Value + "',dev_charge='" + txtdevchrg.Text + "',society_charge='" + txtsctchrg.Text + "',stvat='" + txtstvat.Text + "',agreement_tax='" + txtagree.Text + "',document_charge='" + txtdocu.Text + "',maintenance='" + txtmain10.Text + "',stamp_duty='" + txtduty.Text + "',other='" + txtother.Text + "',total='" + txtam1.Value + "',balance='" + (Convert.ToDouble(txtam1.Value) + Convert.ToDouble(paid)) + "',agree_value='" + av.Text + "',ocr='" + hocr.Value + "',em='" + hem.Value + "',loan='" + loan.Text + "',comment='" + txtcomment.InnerText + "' where cust_id='" + a + "'";
-                SqlCommand cmd111 = new SqlCommand(strq11, con);
-                SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
-                DataSet ds11 = new DataSet();
-                da11.Fill(ds11, val);
-                string strq3 = "update  " + val2 + "  set cust_name='" + txtname.Text + "',date='" + txtbdate.Text + "',cust_id='" + a + "'  where complex_name='" + complex.SelectedItem.Text + "' and building_name='" + building.SelectedItem.Text + "' and wing='" + wing.SelectedItem.Text + "' and flat_floor='" + floor.SelectedItem.Text + "' and flat_no='" + flatno.SelectedItem.Text + "'";
-                SqlCommand cmd31 = new SqlCommand(strq3, con);
-                SqlDataAdapter da3 = new SqlDataAdapter(cmd31);
-                DataSet ds3 = new DataSet();
-                da3.Fill(ds3, val2);
-                string strq2 = "update  " + val44 + "  set name='" + txtname.Text + "',balance='" + (Convert.ToDouble(txtam1.Value)) + "' where id='" + a + "' and type='Customer'";
-                SqlCommand cmd21 = new SqlCommand(strq2, con);
-                SqlDataAdapter da2 = new SqlDataAdapter(cmd21);
-                DataSet ds2 = new DataSet();
-                da2.Fill(ds2, val44);
-                con.Close();
-                Response.Redirect("Customer.aspx?success=true");
-            }
-        }
-        else
-        {
-            if (cn.Value == complex.SelectedItem.Text && bn.Value == building.SelectedItem.Text && wingn.Value == wing.SelectedItem.Text && floorn.Value == floor.SelectedItem.Text && flatnon.Value == flatno.SelectedItem.Text)
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot();", true);
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot1();", true);
-                String strConnString = System.Configuration.ConfigurationManager
-                             .ConnectionStrings["conString"].ConnectionString;
-                SqlConnection con = new SqlConnection(strConnString);
-                con.Open();
-                string strq10000 = "update  " + val44 + "  set balance=balance-'" + total.Value + "' where name='" + cname.Value + "' and type='Customer'";
-                SqlCommand cmd10000 = new SqlCommand(strq10000, con);
-                SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
-                DataSet ds10000 = new DataSet();
-                da10000.Fill(ds10000, val44);
-                string strquery = "select paid from " + val + " where cust_id='" + a + "'";
-                String strConnString1 = System.Configuration.ConfigurationManager
-           .ConnectionStrings["conString"].ConnectionString;
-                SqlConnection con1 = new SqlConnection(strConnString1);
-                con1.Open();
-                SqlDataReader dr;
-                SqlCommand cmd = new SqlCommand(strquery, con1);
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    paid = dr.GetValue(0).ToString();
-                }
-                string strq11 = "update  " + val + "  set cust_name='" + cname.Value + "',cust_mobile1='" + txtmob1.Text + "',cust_mobile2='" + txtmob2.Text + "',cust_address_current='" + txtcaddress.InnerText + "',cust_address_permanent='" + txtpaddress.InnerText + "',cust_email='" + txtemail.Text + "',cust_booking_date='" + txtbdate.Text + "',complex_id='" + complex.SelectedItem.Value + "',complex_name='" + complex.SelectedItem.Text + "',building_id='" + building.SelectedItem.Value + "',building_name='" + building.SelectedItem.Text + "',wing='" + wing.SelectedItem.Text + "',flat_floor='" + floor.SelectedItem.Text + "',flat_no='" + flatno.SelectedItem.Text + "',flat_type='" + txtflattype.Text + "',flat_area='" + txtarea.Text + "',rate='" + txtrate.Text + "',amount='" + txtam.Value + "',dev_charge='" + txtdevchrg.Text + "',society_charge='" + txtsctchrg.Text + "',stvat='" + txtstvat.Text + "',agreement_tax='" + txtagree.Text + "',document_charge='" + txtdocu.Text + "',maintenance='" + txtmain10.Text + "',stamp_duty='" + txtduty.Text + "',other='" + txtother.Text + "',total='" + txtam1.Value + "',balance='" + (Convert.ToDouble(txtam1.Value) + Convert.ToDouble(paid)) + "',agree_value='" + av.Text + "',ocr='" + hocr.Value + "',em='" + hem.Value + "',loan='" + loan.Text + "',comment='" + txtcomment.InnerText + "' where cust_id='" + a + "'";
-                SqlCommand cmd111 = new SqlCommand(strq11, con);
-                SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
-                DataSet ds11 = new DataSet();
-                da11.Fill(ds11, val);
-                string strq3 = "update  " + val2 + "  set cust_name='" + cname.Value + "',date='" + txtbdate.Text + "' where cust_id='" + a + "'";
-                SqlCommand cmd31 = new SqlCommand(strq3, con);
-                SqlDataAdapter da3 = new SqlDataAdapter(cmd31);
-                DataSet ds3 = new DataSet();
-                da3.Fill(ds3, val2);
-                string strq2 = "update  " + val44 + "  set name='" + cname.Value + "',ledger_id='" + nid.Value + "',ledger_name='" + nname.Value + "',balance='" + (Convert.ToDouble(txttotal.Text)) + "',main_id='"+mainid.Value+"',main_name='"+mainname.Value+"' where id='" + a + "' and type='Customer'";
-                SqlCommand cmd21 = new SqlCommand(strq2, con);
-                SqlDataAdapter da2 = new SqlDataAdapter(cmd21);
-                DataSet ds2 = new DataSet();
-                da2.Fill(ds2, val44);
-                con.Close();
-                Response.Redirect("Customer.aspx?success=true");
-            }
-            else
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot();", true);
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot1();", true);
-                String strConnString = System.Configuration.ConfigurationManager
-                             .ConnectionStrings["conString"].ConnectionString;
-                SqlConnection con = new SqlConnection(strConnString);
-                con.Open();
-                string strq10000 = "update  " + val44 + "  set balance=balance+'" + total.Value + "' where name='" + cname.Value + "' type='Customer'";
+                string strq10000 = "update  " + val44 + "  set balance=balance-'" + txtam1.Value + "' where name='" + txtname.Text + "'";
                 SqlCommand cmd10000 = new SqlCommand(strq10000, con);
                 SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
                 DataSet ds10000 = new DataSet();
@@ -468,7 +354,103 @@ public partial class Update_Customer1 : System.Web.UI.Page
                 SqlCommand cmd81 = new SqlCommand(strq8, con);
                 SqlDataAdapter da8 = new SqlDataAdapter(cmd81);
                 DataSet ds8 = new DataSet();
-                da8.Fill(ds8, val2);
+                da8.Fill(ds8, val);
+                string strq11 = "update  " + val + "  set cust_name='" + txtname.Text + "',cust_mobile1='" + txtmob1.Text + "',cust_mobile2='" + txtmob2.Text + "',cust_address_current='" + txtcaddress.InnerText + "',cust_address_permanent='" + txtpaddress.InnerText + "',cust_email='" + txtemail.Text + "',cust_booking_date='" + txtbdate.Text + "',complex_id='" + complex.SelectedItem.Value + "',complex_name='" + complex.SelectedItem.Text + "',building_id='" + building.SelectedItem.Value + "',building_name='" + building.SelectedItem.Text + "',wing='" + wing.SelectedItem.Text + "',flat_floor='" + floor.SelectedItem.Text + "',flat_no='" + flatno.SelectedItem.Text + "',flat_type='" + txtflattype.Text + "',flat_area='" + txtarea.Text + "',rate='" + txtrate.Text + "',amount='" + txtam.Value + "',dev_charge='" + txtdevchrg.Text + "',society_charge='" + txtsctchrg.Text + "',stvat='" + txtstvat.Text + "',agreement_tax='" + txtagree.Text + "',document_charge='" + txtdocu.Text + "',maintenance='" + txtmain10.Text + "',stamp_duty='" + txtduty.Text + "',other='" + txtother.Text + "',total='" + txtam1.Value + "',balance='" + (Convert.ToDouble(txtam1.Value) + Convert.ToDouble(paid)) + "',agree_value='" + av.Text + "',ocr='" + hocr.Value + "',em='" + hem.Value + "',loan='" + loan.Text + "',comment='" + txtcomment.InnerText + "' where cust_id='" + a + "'";
+                SqlCommand cmd111 = new SqlCommand(strq11, con);
+                SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
+                DataSet ds11 = new DataSet();
+                da11.Fill(ds11, val);
+                string strq3 = "update  " + val2 + "  set cust_name='" + txtname.Text + "',date='" + txtbdate.Text + "',cust_id='" + a + "'  where complex_name='" + complex.SelectedItem.Text + "' and building_name='" + building.SelectedItem.Text + "' and wing='" + wing.SelectedItem.Text + "' and flat_floor='" + floor.SelectedItem.Text + "' and flat_no='" + flatno.SelectedItem.Text + "'";
+                SqlCommand cmd31 = new SqlCommand(strq3, con);
+                SqlDataAdapter da3 = new SqlDataAdapter(cmd31);
+                DataSet ds3 = new DataSet();
+                da3.Fill(ds3, val2);
+                string strq2 = "update  " + val44 + "  set name='" + txtname.Text + "',balance='" + (Convert.ToDouble(txtam1.Value)) + "' where id='" + a + "'";
+                SqlCommand cmd21 = new SqlCommand(strq2, con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd21);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2, val44);
+                con.Close();
+                Response.Redirect("Customer.aspx?success=true");
+            }
+        }
+        else
+        {
+            if (cn.Value == complex.SelectedItem.Text && bn.Value == building.SelectedItem.Text && wingn.Value == wing.SelectedItem.Text && floorn.Value == floor.SelectedItem.Text && flatnon.Value == flatno.SelectedItem.Text)
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot();", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot1();", true);
+                String strConnString = System.Configuration.ConfigurationManager
+                             .ConnectionStrings["conString"].ConnectionString;
+                SqlConnection con = new SqlConnection(strConnString);
+                con.Open();
+                string strq10000 = "update  " + val44 + "  set balance=balance-'" + txttotal.Text + "' where name='" + cname.Value + "'";
+                SqlCommand cmd10000 = new SqlCommand(strq10000, con);
+                SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
+                DataSet ds10000 = new DataSet();
+                da10000.Fill(ds10000, val45);
+                string strquery = "select paid from " + val + " where cust_id='" + a + "'";
+                String strConnString1 = System.Configuration.ConfigurationManager
+           .ConnectionStrings["conString"].ConnectionString;
+                SqlConnection con1 = new SqlConnection(strConnString1);
+                con1.Open();
+                SqlDataReader dr;
+                SqlCommand cmd = new SqlCommand(strquery, con1);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    paid = dr.GetValue(0).ToString();
+                }
+                string strq11 = "update  " + val + "  set cust_name='" + cname.Value + "',cust_mobile1='" + txtmob1.Text + "',cust_mobile2='" + txtmob2.Text + "',cust_address_current='" + txtcaddress.InnerText + "',cust_address_permanent='" + txtpaddress.InnerText + "',cust_email='" + txtemail.Text + "',cust_booking_date='" + txtbdate.Text + "',complex_id='" + complex.SelectedItem.Value + "',complex_name='" + complex.SelectedItem.Text + "',building_id='" + building.SelectedItem.Value + "',building_name='" + building.SelectedItem.Text + "',wing='" + wing.SelectedItem.Text + "',flat_floor='" + floor.SelectedItem.Text + "',flat_no='" + flatno.SelectedItem.Text + "',flat_type='" + txtflattype.Text + "',flat_area='" + txtarea.Text + "',rate='" + txtrate.Text + "',amount='" + txtam.Value + "',dev_charge='" + txtdevchrg.Text + "',society_charge='" + txtsctchrg.Text + "',stvat='" + txtstvat.Text + "',agreement_tax='" + txtagree.Text + "',document_charge='" + txtdocu.Text + "',maintenance='" + txtmain10.Text + "',stamp_duty='" + txtduty.Text + "',other='" + txtother.Text + "',total='" + txtam1.Value + "',balance='" + (Convert.ToDouble(txttotal.Text) + Convert.ToDouble(paid)) + "',agree_value='" + av.Text + "',ocr='" + hocr.Value + "',em='" + hem.Value + "',loan='" + loan.Text + "',comment='" + txtcomment.InnerText + "' where cust_id='" + a + "'";
+                SqlCommand cmd111 = new SqlCommand(strq11, con);
+                SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
+                DataSet ds11 = new DataSet();
+                da11.Fill(ds11, val);
+                string strq3 = "update  " + val2 + "  set cust_name='" + cname.Value + "',date='" + txtbdate.Text + "' where cust_id='" + a + "'";
+                SqlCommand cmd31 = new SqlCommand(strq3, con);
+                SqlDataAdapter da3 = new SqlDataAdapter(cmd31);
+                DataSet ds3 = new DataSet();
+                da3.Fill(ds3, val2);
+                string strq2 = "update  " + val44 + "  set name='" + cname.Value + "',ledger_id='" + nid.Value + "',ledger_name='" + nname.Value + "',balance='" + (Convert.ToDouble(txttotal.Text)) + "' where id='" + a + "'";
+                SqlCommand cmd21 = new SqlCommand(strq2, con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd21);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2, val44);
+                con.Close();
+                Response.Redirect("Customer.aspx?success=true");
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot();", true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot1();", true);
+                String strConnString = System.Configuration.ConfigurationManager
+                             .ConnectionStrings["conString"].ConnectionString;
+                SqlConnection con = new SqlConnection(strConnString);
+                con.Open();
+                string strq10000 = "update  " + val44 + "  set balance=balance+'" + txtam1.Value + "' where name='" + cname.Value + "'";
+                SqlCommand cmd10000 = new SqlCommand(strq10000, con);
+                SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
+                DataSet ds10000 = new DataSet();
+                da10000.Fill(ds10000, val45);
+                string strquery = "select paid from " + val + " where cust_id='" + a + "'";
+                String strConnString1 = System.Configuration.ConfigurationManager
+           .ConnectionStrings["conString"].ConnectionString;
+                SqlConnection con1 = new SqlConnection(strConnString1);
+                con1.Open();
+                SqlDataReader dr;
+                SqlCommand cmd = new SqlCommand(strquery, con1);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    paid = dr.GetValue(0).ToString();
+                }
+                string strq8 = "update  " + val2 + "  set cust_name='',cust_id='',date='' where complex_name='" + cn.Value + "' and building_name='" + bn.Value + "' and wing='" + wingn.Value + "' and flat_floor='" + floorn.Value + "' and flat_no='" + flatnon.Value + "'";
+                SqlCommand cmd81 = new SqlCommand(strq8, con);
+                SqlDataAdapter da8 = new SqlDataAdapter(cmd81);
+                DataSet ds8 = new DataSet();
+                da8.Fill(ds8, val);
                 string strq11 = "update  " + val + "  set cust_name='" + cname.Value + "',cust_mobile1='" + txtmob1.Text + "',cust_mobile2='" + txtmob2.Text + "',cust_address_current='" + txtcaddress.InnerText + "',cust_address_permanent='" + txtpaddress.InnerText + "',cust_email='" + txtemail.Text + "',cust_booking_date='" + txtbdate.Text + "',complex_id='" + complex.SelectedItem.Value + "',complex_name='" + complex.SelectedItem.Text + "',building_id='" + building.SelectedItem.Value + "',building_name='" + building.SelectedItem.Text + "',wing='" + wing.SelectedItem.Text + "',flat_floor='" + floor.SelectedItem.Text + "',flat_no='" + flatno.SelectedItem.Text + "',flat_type='" + txtflattype.Text + "',flat_area='" + txtarea.Text + "',rate='" + txtrate.Text + "',amount='" + txtam.Value + "',dev_charge='" + txtdevchrg.Text + "',society_charge='" + txtsctchrg.Text + "',stvat='" + txtstvat.Text + "',agreement_tax='" + txtagree.Text + "',document_charge='" + txtdocu.Text + "',maintenance='" + txtmain10.Text + "',stamp_duty='" + txtduty.Text + "',other='" + txtother.Text + "',total='" + txtam1.Value + "',balance='" + (Convert.ToDouble(txtam1.Value) + Convert.ToDouble(paid)) + "',agree_value='" + av.Text + "',ocr='" + hocr.Value + "',em='" + hem.Value + "',loan='" + loan.Text + "',comment='" + txtcomment.InnerText + "' where cust_id='" + a + "'";
                 SqlCommand cmd111 = new SqlCommand(strq11, con);
                 SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
@@ -479,7 +461,7 @@ public partial class Update_Customer1 : System.Web.UI.Page
                 SqlDataAdapter da3 = new SqlDataAdapter(cmd31);
                 DataSet ds3 = new DataSet();
                 da3.Fill(ds3, val2);
-                string strq2 = "update  " + val44 + "  set name='" + cname.Value + "',ledger_id='" + nid.Value + "',ledger_name='" + nname.Value + "',balance='" + (Convert.ToDouble(txtam1.Value)) + "',main_id='" + mainid.Value + "',main_name='" + mainname.Value + "' where id='" + a + "' and type='Customer'";
+                string strq2 = "update  " + val44 + "  set name='" + cname.Value + "',ledger_id='" + nid.Value + "',ledger_name='" + nname.Value + "',balance='" + (Convert.ToDouble(txtam1.Value) ) + "' where id='" + a + "'";
                 SqlCommand cmd21 = new SqlCommand(strq2, con);
                 SqlDataAdapter da2 = new SqlDataAdapter(cmd21);
                 DataSet ds2 = new DataSet();

@@ -73,7 +73,7 @@ public partial class Update_Purchase : System.Web.UI.Page
                     txtqtype.Text = dr.GetString(4);
                     txtrate.Text = dr.GetValue(5).ToString();
                     txtamt.Text = dr.GetValue(6).ToString();
-                    fama.Value = dr.GetValue(6).ToString();
+                    amt.Value = dr.GetValue(6).ToString();
                     txtvname.Text = dr.GetString(7);
                     vn1.Value = dr.GetString(7);
                     txtadd.InnerText = dr.GetString(8);
@@ -101,7 +101,10 @@ public partial class Update_Purchase : System.Web.UI.Page
 
     protected void btnSub_Click(object sender, EventArgs e)
     {
-        
+        i1 = Convert.ToInt32(i11.Value);
+        mat = mat1.Value;
+        pb = pb1.Value;
+        vn = vn1.Value;
         String strConnString = System.Configuration.ConfigurationManager
                           .ConnectionStrings["conString"].ConnectionString;
         SqlConnection con = new SqlConnection(strConnString);
@@ -140,28 +143,24 @@ public partial class Update_Purchase : System.Web.UI.Page
         }
         else
         {
-            string strq99 = "update  " + val44 + "  set balance=balance-'" + fama.Value + "' where name='" + vn1.Value + "' and type='Vendor'";
+            string strq99 = "update  " + val44 + "  set balance=balance-'" + amt.Value + "' where name='" + txtvname.Text + "'";
             SqlCommand cmd99 = new SqlCommand(strq99, con);
             SqlDataAdapter da99 = new SqlDataAdapter(cmd99);
             DataSet ds99 = new DataSet();
-            da99.Fill(ds99, val44);
-            if (txtmname.Text.ToLower() == mat1.Value)
+            da99.Fill(ds99, val45);
+            if (txtmname.Text.ToLower() == mat)
             {
-                if (amt.Value == "")
-                {
-                    amt.Value = txtamt.Text;
-                }
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
               
                 i2 = Convert.ToInt32(txtqty.Text);
 
-                string strq1000 = "update  " + val44 + "  set balance=balance+'" + amt.Value + "' where name='" + txtvname.Text + "' and type='Vendor'";
+                string strq1000 = "update  " + val44 + "  set balance=balance+'" + amt.Value + "' where name='" + txtvname.Text + "'";
                 SqlCommand cmd1000 = new SqlCommand(strq1000, con);
                 SqlDataAdapter da1000 = new SqlDataAdapter(cmd1000);
                 DataSet ds1000 = new DataSet();
-                da1000.Fill(ds1000, val44);
+                da1000.Fill(ds1000, val45);
                 i3 = i2 - i1;
-                string strq4 = "update  "+val45+" set quantity=quantity-'" + i11.Value + "' where  id='" + bp1.Value + "'";
+                string strq4 = "update  "+val45+" set quantity=quantity-'" + i1 + "' where  id='" + bp1.Value + "'";
                 SqlCommand cmd4 = new SqlCommand(strq4, con);
                 SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
                 DataSet ds4 = new DataSet();
@@ -180,7 +179,18 @@ public partial class Update_Purchase : System.Web.UI.Page
             }
             else
             {
-              
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
+                i2 = Convert.ToInt32(txtqty.Text);
+                string strq1000 = "update  " + val44 + "  set balance=balance+'" + amt.Value + "' where name='" + txtvname.Text + "'";
+                SqlCommand cmd1000 = new SqlCommand(strq1000, con);
+                SqlDataAdapter da1000 = new SqlDataAdapter(cmd1000);
+                DataSet ds1000 = new DataSet();
+                da1000.Fill(ds1000, val45);
+                string strq2 = "update  "+val45+" set quantity=quantity-'" + i1 + "' where id='" + bp1.Value + "'";
+                SqlCommand cmd2 = new SqlCommand(strq2, con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2, val45);
                 string s11 = "select name from "+val45+" where name='"+ txtmname.Text + "'";
                 SqlDataReader dr11;
                 SqlCommand cmd11 = new SqlCommand(s11, con);
@@ -193,24 +203,15 @@ public partial class Update_Purchase : System.Web.UI.Page
                 dr11.Close();
                 if (sp2 == txtmname.Text.ToLower())
                 {
-                    if (amt.Value == "")
-                    {
-                        amt.Value = txtamt.Text;
-                    }
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
                     i2 = Convert.ToInt32(txtqty.Text);
 
                     i3 = i2 - i1;
-                    string strq4 = "update  " + val45 + " set quantity=quantity-'" + i11.Value + "' where  id='" + bp1.Value + "'";
-                    SqlCommand cmd4 = new SqlCommand(strq4, con);
-                    SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
-                    DataSet ds4 = new DataSet();
-                    da4.Fill(ds4, val45);
-                    string strq10000 = "update  " + val44 + "  set balance=balance+'" + amt.Value + "' where name='" + txtvname.Text + "' and type='Vendor'";
+                    string strq10000 = "update  " + val44 + "  set balance=balance+'" + amt.Value + "' where name='" + txtvname.Text + "'";
                     SqlCommand cmd10000 = new SqlCommand(strq10000, con);
                     SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
                     DataSet ds10000 = new DataSet();
-                    da10000.Fill(ds10000, val44);
+                    da10000.Fill(ds10000, val45);
                     string strq22 = "update  "+val45+" set quantity=quantity+'" + i2 + "' where  name='" + sp2 + "'";
                     SqlCommand cmd22 = new SqlCommand(strq22, con);
                     SqlDataAdapter da22 = new SqlDataAdapter(cmd22);
@@ -230,15 +231,6 @@ public partial class Update_Purchase : System.Web.UI.Page
                     Random r = new Random();
                     j = r.Next();
                     string g = txtmname.Text + j;
-                    if (amt.Value == "")
-                    {
-                        amt.Value = txtamt.Text;
-                    }
-                    string strq4 = "update  " + val45 + " set quantity=quantity-'" + i11.Value + "' where  id='" + bp1.Value + "'";
-                    SqlCommand cmd4 = new SqlCommand(strq4, con);
-                    SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
-                    DataSet ds4 = new DataSet();
-                    da4.Fill(ds4, val45);
                     string strq33 = "insert into  "+val45+"  values('" + g + "','" + txtmname.Text + "','" + txtqty.Text + "','" + txtqtype.Text + "')";
                     SqlCommand cmd33 = new SqlCommand(strq33, con);
                     SqlDataAdapter da33 = new SqlDataAdapter(cmd33);
@@ -248,8 +240,8 @@ public partial class Update_Purchase : System.Web.UI.Page
                     SqlCommand cmd10000 = new SqlCommand(strq10000, con);
                     SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
                     DataSet ds10000 = new DataSet();
-                    da10000.Fill(ds10000, val44);
-                    string strq3 = "update " + val + " set purchase_id='"+g+"' material_name='" + txtmname.Text + "',quantity='" + txtqty.Text + "',quantity_type='" + txtqtype.Text + "',rate='" + txtrate.Text + "',amount='" + txtamt.Text + "',vendor_name='" + txtvname.Text + "',vendor_address='" + txtadd.InnerText + "',vendor_mobile='" + txtmob.Text + "',purchased_by='" + txtpurby.Text + "',type_of_purchase='" + type.SelectedItem.Text + "',challan='" + challan.Text + "',bill='" + bill.Text + "',comment='" + txtcomment.InnerText + "' where purchase_id='" + bp1.Value + "'";
+                    da10000.Fill(ds10000, val45);
+                    string strq3 = "update " + val + " set material_name='" + txtmname.Text + "',quantity='" + txtqty.Text + "',quantity_type='" + txtqtype.Text + "',rate='" + txtrate.Text + "',amount='" + amt.Value + "',vendor_name='" + txtvname.Text + "',vendor_address='" + txtadd.InnerText + "',vendor_mobile='" + txtmob.Text + "',purchased_by='" + txtpurby.Text + "',type_of_purchase='" + type.SelectedItem.Text + "',challan='" + challan.Text + "',bill='" + bill.Text + "',comment='" + txtcomment.InnerText + "' where purchase_id='" + bp1.Value + "'";
                     SqlCommand cmd3 = new SqlCommand(strq3, con);
                     SqlDataAdapter da3 = new SqlDataAdapter(cmd3);
                     DataSet ds3 = new DataSet();

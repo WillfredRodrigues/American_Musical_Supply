@@ -43,23 +43,18 @@ EnablePageMethods = "true">
                   <asp:HiddenField ID="txttt2" runat="server" ClientIDMode="Static" />
                   <asp:HiddenField ID="hf" runat="server" ClientIDMode="Static" />
                   <asp:HiddenField ID="gf1" runat="server" ClientIDMode="Static" />
-                   <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txt1" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr><td>Select Sub Group:&nbsp;</td>
         <td><asp:TextBox ID="txt" runat="server"
-                ClientIDMode="Static"></asp:TextBox> <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ControlToValidate="txt" ForeColor="Red"></asp:RequiredFieldValidator></td></tr>
-    <tr><td>&nbsp;</td></tr>
+                ClientIDMode="Static"></asp:TextBox></td></tr>
+     <tr><td colspan="2"><p style="color:Red; text-transform:capitalize">If no sub group is selected,the new group will be considered as master group</p></td></tr>
         <tr>
             <td colspan="2">
                 <center>
                     <asp:Button ID="btn2" runat="server"  Text="Submit" onclick="btn2_Click" 
                         /></center>
-                        <asp:TextBox AutoComplete="off" ID="TextBox1" runat="server" Visible="false"></asp:TextBox>
-        <asp:TextBox AutoComplete="off" ID="TextBox2" runat="server" Visible="false" ></asp:TextBox>
-          <asp:TextBox AutoComplete="off" ID="TextBox3" runat="server" Visible="false"></asp:TextBox>
+                       
             </td>
         </tr>
 </table>

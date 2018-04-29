@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Update_Purchase.aspx.cs" Inherits="Update_Purchase" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Update_Purchase.aspx.cs" Inherits="Update_Purchase" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="side" runat="Server">
@@ -18,33 +18,33 @@
 
         function SelectName(url) {
 
-            window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=380,height=150,left=490,top=300');
+            window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=350,height=200,left=490,top=300');
 
 
         }
         function SelectName1(url) {
 
-            window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=380,height=150,left=490,top=300');
+            window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=350,height=200,left=490,top=300');
 
 
         }
     
     </script>
     <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
-           <%if (Session["rightView"].ToString() == "1") %>
+         <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
-           <li><a href="Data_Entry_Home.aspx" class="active-tab dashboard-tab">Day Book</a></li>
+            <li><a href="Purchase.aspx" class="active-tab dashboard-tab">Create Purchase</a></li>
             <%} %>
-            <%if (Session["rightinsert"].ToString() == "1") %>
+             <%if (Session["rightupdate"].ToString() == "1") %>
             <%{ %>
-            <li><a href="Purchase_Home.aspx" class="purchase-tab">Purchase</a></li>
-             <li><a href="Sales_Home.aspx" class="purchase-tab">Sales</a></li>
-            <li><a href="Payment_Entry.aspx" class="active-tab dashboard-tab">Payment</a></li>
-            <li><a href="Receipt_Entry.aspx" class="active-tab dashboard-tab">Receipt</a></li>
-            <li><a href="Contra.aspx" class="active-tab dashboard-tab">Contra</a></li>
-            <li><a href="Journal.aspx" class="active-tab dashboard-tab">Journal</a></li>
+            <li><a href="Update_Purchase1.aspx" class="active-tab dashboard-tab">Update Purchase</a></li>
+            <%} %>
+             <%if (Session["rightdelete"].ToString() == "1") %>
+            <%{ %>
+            <li><a href="Delete_Purchase1.aspx" class="active-tab dashboard-tab">Delete Purchase</a></li>
             <%} %>
         </ul>
     </div>
@@ -74,9 +74,12 @@
     
     <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Update Purchase Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <asp:Panel ID="en" runat="server" ClientIDMode="Static">
                 <center>
                     <table>
@@ -85,7 +88,6 @@
                          <asp:HiddenField ID="vn1" runat="server" />
                           <asp:HiddenField ID="pb1" runat="server" />
                           <asp:HiddenField ID="bp1" runat="server" />
-                           <asp:HiddenField ID="fama" runat="server" />
                         <tr>
                             <td>
                                 Material Name:
@@ -93,17 +95,13 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmname"
                                     runat="server" ClientIDMode="Static"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtmname" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Quantity:
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtqty"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtqty" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -113,17 +111,13 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtqtype"
                                     runat="server" ClientIDMode="Static"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtqtype" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Rate:
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtrate"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtrate" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -134,8 +128,6 @@
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtamt"
                                     runat="server" ReadOnly="true"></asp:TextBox>
                                     <asp:HiddenField ID="amt" runat="server" />
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtamt" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Vendor Name:(<a href="#" onclick="SelectName('Add_Ledger.aspx?id=txtvname&id1=<%=val %>&id2=Vendor'); return false;">Create
@@ -144,8 +136,7 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtvname"
                                     runat="server" ClientIDMode="Static"></asp:TextBox>
-                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtvname" ForeColor="Red"></asp:RequiredFieldValidator>
+                                     
                             </td>
                         </tr>
                         <tr>
@@ -154,16 +145,13 @@
                             </td>
                             <td>
                                 <textarea id="txtadd" runat="server" cssclass=" round" width="180px" height="25px"></textarea>
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtadd" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Vendor Mobile:
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmob"
-                                    runat="server" ></asp:TextBox>
-                                    
+                                    runat="server"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -174,8 +162,6 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtpurby"
                                     runat="server" ClientIDMode="Static"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator9"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtpurby" ForeColor="Red"></asp:RequiredFieldValidator>
                                    
                             </td>
                             
@@ -198,14 +184,8 @@
                                 Purchase Date:
                             </td>
                             <td>
-                               
-        
-      <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtpdate"
+                                <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtpdate"
                                     runat="server"></asp:TextBox>
-        <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" TargetControlID="txtpdate" runat="server">
-        </cc1:CalendarExtender>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator10"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtpdate" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Challan No:
@@ -213,8 +193,6 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="challan"
                                     runat="server"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator11"
-            runat="server" ErrorMessage="Required" ControlToValidate="challan" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             </tr>
                             <tr>
@@ -224,8 +202,6 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="bill"
                                     runat="server"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator12"
-            runat="server" ErrorMessage="Required" ControlToValidate="bill" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 Comment:

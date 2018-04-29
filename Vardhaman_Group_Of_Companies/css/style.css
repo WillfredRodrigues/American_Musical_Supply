@@ -681,7 +681,7 @@ form#loginform {
 }
 
 div.side-menu {
-	/*background: #153450;*/
+	background: #153450;
 	border: 1px solid #eeefef;
 	width: 15%;
 	margin-bottom: 1em; /* 16/16 */

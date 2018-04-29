@@ -11,8 +11,8 @@ public partial class Payment_Entry : System.Web.UI.Page
 {
 
     string s1, s2, s3;
-    public string val, val1, x, y, z, l, m, s4, sp,gen1;
-    static string f, k, a, d, type1, type2, gen;
+    public string val, val1, x, y, z, l, m, s4, sp;
+    static string f, k, a, d, type1,type2;
     string er = null, er1 = null;
     string s, c, c1, c2, c3;
     static string val45, val44, val46;
@@ -52,14 +52,6 @@ public partial class Payment_Entry : System.Web.UI.Page
         {
             Response.Redirect("Login.aspx");
         }
-        if (!IsPostBack)
-        {
-            string stats = Request.QueryString["success"];
-            if (stats != null)
-            {
-                Response.Write("<script>alert('Payment Entry Has Successfully Been Made');</script>");
-            }
-        }
     }
     [System.Web.Script.Services.ScriptMethod()]
     [System.Web.Services.WebMethod]
@@ -71,7 +63,7 @@ public partial class Payment_Entry : System.Web.UI.Page
                     .ConnectionStrings["conString"].ConnectionString;
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select name,type,main_name from  "+val44+"  where " +
+                cmd.CommandText = "select name,type from  "+val44+"  where " +
                 "name like '%'+@SearchText+'%'";
                 cmd.Parameters.AddWithValue("@SearchText", prefixText);
                 cmd.Connection = conn;
@@ -82,9 +74,8 @@ public partial class Payment_Entry : System.Web.UI.Page
                 {
                     while (sdr.Read())
                     {
-                        customers.Add(sdr["name"].ToString());
+                        customers.Add(sdr["name"].ToString() + ":" + sdr["type"].ToString());
                         type1 = sdr["type"].ToString();
-                        gen = sdr["main_name"].ToString();
                        
                     }
                 }
@@ -150,11 +141,11 @@ public partial class Payment_Entry : System.Web.UI.Page
         SqlConnection con = new SqlConnection(strConnString);
         con.Open();
         
-        if (type1 == "Customer")
+        if (er == "Customer")
         {
              s = "select balance from " + val44+ " where type='Customer' and name='" + txtname.Text + "' ";
         }
-        else if (type1 == "Vendor")
+        else if (er == "Vendor")
         {
             s = "select balance from " + val44   + " where type='Vendor' and name='" + txtname.Text + "' ";
         }
@@ -210,17 +201,7 @@ public partial class Payment_Entry : System.Web.UI.Page
         }
         else
         {
-            string s78 = "select display from ledger where name='" + gen + "'";
-            SqlDataReader dr78;
-            SqlCommand cmd78 = new SqlCommand(s78, con);
-            dr78 = cmd78.ExecuteReader();
-            while (dr78.Read())
-            {
-                gen1 = dr78.GetString(0);
-
-            }
-            dr78.Close();
-            if (gen1 == "Liability")
+            if (type1 == "Customer")
             {
 
                 int j;
@@ -233,7 +214,7 @@ public partial class Payment_Entry : System.Web.UI.Page
                 SqlDataAdapter da6 = new SqlDataAdapter(cmd6);
                 DataSet ds6 = new DataSet();
                 da6.Fill(ds6, val);
-                string strq2 = "update  " + val44+" set balance=balance-'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "' ";
+                string strq2 = "update  " + val44+"' set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "' and type='Customer'";
                 SqlCommand cmd2 = new SqlCommand(strq2, con);
                 SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
                 DataSet ds2 = new DataSet();
@@ -243,9 +224,9 @@ public partial class Payment_Entry : System.Web.UI.Page
                 SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
                 DataSet ds5 = new DataSet();
                 da5.Fill(ds5, val46);
-                Response.Redirect("Payment_Entry.aspx?success=true");
+                Response.Redirect("Data_Entry_Home.aspx?success1=true");
             }
-            else if (gen1 == "Assets")
+            else if (type1 == "Vendor")
             {
                 int j;
                 Random r = new Random();
@@ -257,7 +238,7 @@ public partial class Payment_Entry : System.Web.UI.Page
                 SqlDataAdapter da6 = new SqlDataAdapter(cmd6);
                 DataSet ds6 = new DataSet();
                 da6.Fill(ds6, val);
-                string strq2 = "update  " + val44+ " set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "' ";
+                string strq2 = "update  " + val44+ " set balance=balance-'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "' and type='Vendor'";
                 SqlCommand cmd2 = new SqlCommand(strq2, con);
                 SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
                 DataSet ds2 = new DataSet();
@@ -267,55 +248,31 @@ public partial class Payment_Entry : System.Web.UI.Page
                 SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
                 DataSet ds5 = new DataSet();
                 da5.Fill(ds5, val46);
-                Response.Redirect("Payment_Entry.aspx?success=true");
+                Response.Redirect("Data_Entry_Home.aspx?success1=true");
             }
-            else if (gen1 == "Expenses")
+            else
             {
                 int j;
                 Random r = new Random();
                 j = r.Next();
                 string g = txtname.Text + j;
                 string ba = Convert.ToString(Convert.ToDouble(txtaccbal.Text) - Convert.ToDouble(txtamt.Text));
-                string strq6 = "insert into  " + val + "  values('" + g + "','" + txtdate.Text + "','" + txtacc.Text + "','" + txtname.Text + "','" + txtamt.Text + "','" + txtchkddno.Text + "','" + txtchkdddate.Text + "','" + txtbn.Text + "','','" + txtamt.Text + "','" + ba + "','" + txtnara.InnerText + "','" + txtdesc.InnerText + "','Payment')";
-                SqlCommand cmd6 = new SqlCommand(strq6, con);
-                SqlDataAdapter da6 = new SqlDataAdapter(cmd6);
-                DataSet ds6 = new DataSet();
-                da6.Fill(ds6, val);
-                string strq2 = "update  " + val44 + " set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "' ";
+                string strq2 = "insert into  " + val + "  values('" + g + "','" + txtdate.Text + "','" + txtacc.Text + "','" + txtname.Text + "','" + txtamt.Text + "','" + txtchkddno.Text + "','" + txtchkdddate.Text + "','" + txtbn.Text + "','','" + txtamt.Text + "','" + ba + "','" + txtnara.InnerText + "','" + txtdesc.InnerText + "','Payment')";
                 SqlCommand cmd2 = new SqlCommand(strq2, con);
                 SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
                 DataSet ds2 = new DataSet();
-                da2.Fill(ds2, val44);
-                string strq5 = "update " + val46 + " set balance=balance-'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
+                da2.Fill(ds2, val);
+                string strq4 = "update  "+val44+"  set balance=balance-'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "'";
+                SqlCommand cmd4 = new SqlCommand(strq4, con);
+                SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
+                DataSet ds4 = new DataSet();
+                da4.Fill(ds4,val44);
+                string strq5 = "update "+val46+" set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
                 SqlCommand cmd5 = new SqlCommand(strq5, con);
                 SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
                 DataSet ds5 = new DataSet();
                 da5.Fill(ds5, val46);
-                Response.Redirect("Payment_Entry.aspx?success=true");
-            }
-            else if (gen1 == "Income")
-            {
-                int j;
-                Random r = new Random();
-                j = r.Next();
-                string g = txtname.Text + j;
-                string ba = Convert.ToString(Convert.ToDouble(txtaccbal.Text) - Convert.ToDouble(txtamt.Text));
-                string strq6 = "insert into  " + val + "  values('" + g + "','" + txtdate.Text + "','" + txtacc.Text + "','" + txtname.Text + "','" + txtamt.Text + "','" + txtchkddno.Text + "','" + txtchkdddate.Text + "','" + txtbn.Text + "','','" + txtamt.Text + "','" + ba + "','" + txtnara.InnerText + "','" + txtdesc.InnerText + "','Payment')";
-                SqlCommand cmd6 = new SqlCommand(strq6, con);
-                SqlDataAdapter da6 = new SqlDataAdapter(cmd6);
-                DataSet ds6 = new DataSet();
-                da6.Fill(ds6, val);
-                string strq2 = "update  " + val44 + " set balance=balance-'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "' ";
-                SqlCommand cmd2 = new SqlCommand(strq2, con);
-                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
-                DataSet ds2 = new DataSet();
-                da2.Fill(ds2, val44);
-                string strq5 = "update " + val46 + " set balance=balance-'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
-                SqlCommand cmd5 = new SqlCommand(strq5, con);
-                SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
-                DataSet ds5 = new DataSet();
-                da5.Fill(ds5, val46);
-                Response.Redirect("Payment_Entry.aspx?success=true");
+                Response.Redirect("Data_Entry_Home.aspx?success1=true");
             }
 
         }

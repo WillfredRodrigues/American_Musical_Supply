@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Update_Usage.aspx.cs" Inherits="Update_Usage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Update_Usage.aspx.cs" Inherits="Update_Usage" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="side" Runat="Server">
@@ -6,13 +6,13 @@
 <script type = "text/javascript">
     function SelectName(url) {
 
-        window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=380,height=150,left=490,top=300');
+        window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=350,height=200,left=490,top=300');
 
 
     }
     function SelectName1(url) {
 
-        window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=380,height=150,left=490,top=300');
+        window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=350,height=200,left=490,top=300');
 
 
     }
@@ -42,7 +42,8 @@
     }
 </script>
 <div class="side-menu fl">
-        
+        <h3>
+            Quick Links</h3>
         <ul>
          <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -80,9 +81,12 @@
    
 <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Update Usage Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
    <center> <table>
    <tr>
                            <td>
@@ -96,8 +100,6 @@
                 <td>
                     <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px"  
                         ID="txtmname" runat="server"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtmname" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
                             <td>Quantity Available:</td>
                             <td><asp:TextBox ID="avail" runat="server" ReadOnly="true"></asp:TextBox></td>
@@ -109,9 +111,7 @@
                 </td>
               
                 <td>
-                    <asp:TextBox  AutoComplete="off" CssClass=" round" Width="180px" Height="25px"  ID="txtqty" runat="server" onchange="total10()"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtqty" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px"  ID="txtqty" runat="server" onchange="total10()"></asp:TextBox>
                 </td>
                 
                 <td>
@@ -119,8 +119,6 @@
                 </td>
                 <td>
                     <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px"  ID="txtqtype" runat="server"></asp:TextBox>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtqtype" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
            </tr>
                 <tr>
@@ -130,8 +128,7 @@
                 </td>
                 <td>
                     <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px"  ID="txtuby" runat="server" ClientIDMode="Static"></asp:TextBox>
-                  <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtuby" ForeColor="Red"></asp:RequiredFieldValidator>
+                 
                 </td>
                
                 <td>
@@ -140,8 +137,6 @@
                 <td>
                     <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px"  ID="txtbmat" runat="server" ReadOnly="true"></asp:TextBox>
                     <asp:HiddenField ID="bal" runat="server" />
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtbmat" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
                   </tr>
                 <tr>
@@ -160,14 +155,7 @@
                      Usage Date:
                 </td>
                 <td>
-                   
-        
-      <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtudate"
-                                    runat="server"></asp:TextBox>
-        <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" TargetControlID="txtudate" runat="server">
-        </cc1:CalendarExtender>
-                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtudate" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px"  ID="txtudate" runat="server"></asp:TextBox>
                 </td>
                   </tr>
                 <tr>

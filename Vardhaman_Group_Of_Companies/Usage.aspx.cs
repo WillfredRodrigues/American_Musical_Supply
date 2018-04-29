@@ -95,13 +95,13 @@ public partial class Usage : System.Web.UI.Page
             SqlDataAdapter da22 = new SqlDataAdapter(cmd2222);
             DataSet ds22 = new DataSet();
             da22.Fill(ds22, val45);
-            string strq = "insert into " + val + " values('" + txtudate.Text + "','" + od.Value + "','" + txtmname.Text + "','" + txtqty.Text + "','" + txtqtype.Text + "','" + txtuby.Text + "','" + bal.Value + "','" + type.SelectedItem.Text + "','','" + txtcomment.InnerText + "')";
+            string strq = "insert into " + val + " values('" + txtudate.Text + "','" + od.Value + "','" + txtmname.Text + "','" + txtqty.Text + "','" + txtqtype.Text + "','" + txtuby.Text + "','" + bal.Value + "','" + type.SelectedItem.Text + "','" + DateTime.Now + "','" + txtcomment.InnerText + "')";
             SqlCommand cmd1 = new SqlCommand(strq, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd1);
             DataSet ds = new DataSet();
             da.Fill(ds, val);
             con.Close();
-            Response.Redirect("Usage.aspx?success=true");
+            Response.Redirect("Usage_Home.aspx?success2=true");
         }
        
  

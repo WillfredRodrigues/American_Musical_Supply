@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
-<head runat="server">
+<head>
 <asp:ContentPlaceHolder ID="Scripting" runat="server"></asp:ContentPlaceHolder>
 	<meta charset="utf-8">
 	<title>Dashboard</title>
@@ -21,26 +21,11 @@
 		<link rel="stylesheet" href="css/cmxform.css">
 	
     <script type="text/javascript">
-        function SelectName11(url) {
+        function SelectName1(url) {
 
-            window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=425,height=330,left=490,top=300');
+            window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=350,height=200,left=490,top=300');
 
 
-        }
-    </script>
-     <script type = "text/javascript">
-         function isNumeric(keyCode) {
-             return ((keyCode >= 48 && keyCode <= 57) || keyCode == 8 || (keyCode >= 96 && keyCode <= 105))
-         }
-    </script>
-    <script type = "text/javascript">
-        function isAlpha(keyCode) {
-            return ((keyCode >= 65 && keyCode <= 90) || keyCode == 8)
-        }
-    </script> 
-    <script type = "text/javascript">
-        function isAlphaNumeric(keyCode) {
-            return ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 65 && keyCode <= 90) || keyCode == 8)
         }
     </script>
 <script>
@@ -123,23 +108,24 @@
 
 			<ul id="nav" class="fl">
 	
-				
+				<li class="v-sep"><a href="javascript:void(0);" onclick="javascript:window.open('shortcuts.html','myNewWinsr','width=600,height=110,toolbar=0,menubar=no,status=no,resizable=yes,location=no,directories=no,scrollbars=yes');" class="round button dark ic-info image-left">Show Shortcuts</a></li>
 				<li class="v-sep"><a href="#" class="round button dark menu-user image-left">Logged in as <strong><%=Session["logged_in"].ToString() %></strong></a>
-					
+					<ul>
+				
+						<li><a href="change_password.php">Change Password</a></li>
+						
+						<li><asp:Button ID="logout1" Text="Logout" runat="server" /></li>
+					</ul> 
 				</li>
-               
-                
-           
-             
-               
-				<li><a href="#" onclick="SelectName11('AddGroup.aspx'); return false;"  class="round button dark menu-settings image-left">Create Ledger Group</a></li>
+			<li><a href="update_details.php" class="round button dark menu-settings image-left">Update Store Details</a></li>
+				<li><a href="#" onclick="SelectName1('AddGroup.aspx'); return false;"  class="round button dark menu-settings image-left">Create Ledger Group</a></li>
 				
 			</ul> <!-- end nav -->
 
 					
-			                                  <a 
-                 class="round button dark menu-logoff image-left" 
-                style="background-color: #cc0000" href="Login.aspx?id=1">Log Out</a>
+			                                  <asp:Button ID="logout" Text="Logout" 
+                runat="server" class="round button dark menu-logoff image-left" 
+                style="background-color: #cc0000" onclick="logout_Click"/>
 				
 
 		</div> <!-- end full-width -->	
@@ -167,16 +153,16 @@
             
 				<li><a href="MainAdmin.aspx" class="active-tab dashboard-tab" >Dashboard</a></li>
                 <li><a href="Data_Entry_Home.aspx" class="payment-tab">Data Entry</a></li>
-                <%-- <%if (Session["menu"].ToString() != "3") %>
-            <%{ %>--%>
+                 <%if (Session["menu"].ToString() != "3") %>
+            <%{ %>
 				<li><a href="Project.aspx" class="sales-tab">Project</a></li>
 				<li><a href="Project_User.aspx" class=" customers-tab">User</a></li>
-				<li><a href="Task.aspx" class=" customers-tab">Schedule Task</a></li>
+				<li><a href="Purchase_Home.aspx" class="purchase-tab">Purchase</a></li>
 				<li><a href="Usage_Home.aspx" class=" supplier-tab">Usage</a></li>
 				<li><a href="Complex_Home.aspx" class=" stock-tab">Complex</a></li>
                 <li><a href="Customer.aspx" class="sales-tab">Customers</a></li>
                 <li><a href="BS_P_L.aspx" class="report-tab">BS/ P & L</a></li>
-              <%--  <%} %>--%>
+                <%} %>
                                
 				</asp:Panel>
                 <asp:Panel ID="panuser" runat="server">
@@ -225,7 +211,7 @@
 	<!-- FOOTER -->
 	<div id="footer">
 	<h4 style="font-family: Georgia;     font-weight: bold; font-size:15px; color: #0060BF">
-©2015 Copyright. All rights reserved.
+©2014 Clarus World Academy LLP. All rights reserved.
 
 
 	</div> <!-- end footer -->

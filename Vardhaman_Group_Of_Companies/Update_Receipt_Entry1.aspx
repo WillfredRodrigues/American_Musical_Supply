@@ -1,34 +1,27 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Update_Receipt_Entry1.aspx.cs" Inherits="Update_Receipt_Entry1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Update_Receipt_Entry1.aspx.cs" Inherits="Update_Receipt_Entry1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Scripting" Runat="Server">
 <script type="text/javascript">
     function SelectName1(url) {
 
-        window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=410,height=180,left=490,top=300');
-
-
-    }
-    function SelectName(url) {
-
-        window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=380,height=150,left=490,top=300');
+        window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=400,height=250,left=490,top=300');
 
 
     }
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" Runat="Server">
- <div class="side-menu fl"><asp:HiddenField ID="ty" runat="server" /><asp:HiddenField ID="ty1" runat="server" /><asp:HiddenField ID="gen1" runat="server" />
-       
+ <div class="side-menu fl">
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightView"].ToString() == "1") %>
             <%{ %>
-           <li><a href="Data_Entry_Home.aspx" class="active-tab dashboard-tab">Day Book</a></li>
+            <li><a href="Day_Book.aspx" class="active-tab dashboard-tab">Day Book</a></li>
             <%} %>
             <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
-            <li><a href="Purchase_Home.aspx" class="purchase-tab">Purchase</a></li>
-             <li><a href="Sales_Home.aspx" class="purchase-tab">Sales</a></li>
             <li><a href="Payment_Entry.aspx" class="active-tab dashboard-tab">Payment</a></li>
             <li><a href="Receipt_Entry.aspx" class="active-tab dashboard-tab">Receipt</a></li>
             <li><a href="Contra.aspx" class="active-tab dashboard-tab">Contra</a></li>
@@ -52,9 +45,12 @@
     </cc1:AutoCompleteExtender>
   <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Update Receipt Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
               
@@ -72,8 +68,6 @@
                 <td>
                     <asp:TextBox AutoComplete="off" ID="txtacc" runat="server" AutoPostBack="true" 
                         ontextchanged="txtacc_TextChanged"></asp:TextBox>
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtacc" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
                  <td>
                    Balance:
@@ -84,15 +78,13 @@
                  </tr>
                 <tr>
                 <td>
-                    Name:(<a href="#" onclick="SelectName('Add_Ledger.aspx?id=txtname&id1=<%=val %>&id2=Receipt'); return false;">Create
+                    Name:(<a href="#" onclick="SelectName('Add_Ledger.aspx?id=txtname&id1=<%=val %>&id2=Payment'); return false;">Create
                                     New</a>)
                 </td>
                 <td>
                     <asp:TextBox AutoComplete="off" ID="txtname" runat="server" AutoPostBack="true" 
-                        ontextchanged="txtname_TextChanged" ClientIDMode="Static"></asp:TextBox>
+                        ontextchanged="txtname_TextChanged"></asp:TextBox>
                         <asp:HiddenField ID="name" runat="server" />
-                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtname" ForeColor="Red"></asp:RequiredFieldValidator>
                 </td>
                 
                 <td>
@@ -107,22 +99,13 @@
                     Payment Date:
                 </td>
                 <td>
-                    
-        
-      <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtdate"
-                                    runat="server"></asp:TextBox>
-        <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" TargetControlID="txtdate" runat="server">
-        </cc1:CalendarExtender>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtdate" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:TextBox AutoComplete="off" ID="txtdate" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     Amount:
                 </td>
                 <td>
-                    <asp:TextBox AutoComplete="off" ID="txtamt" runat="server" ></asp:TextBox>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtamt" ForeColor="Red"></asp:RequiredFieldValidator>
+                    <asp:TextBox AutoComplete="off" ID="txtamt" runat="server"></asp:TextBox>
                 </td>
                 </tr>
                 <tr>

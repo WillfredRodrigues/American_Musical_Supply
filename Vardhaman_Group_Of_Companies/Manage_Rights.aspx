@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true"
     CodeFile="Manage_Rights.aspx.cs" Inherits="Manage_Rights" %>
 
 <%@ Import Namespace="System.Data" %>
@@ -6,7 +6,8 @@
 <%@ Import Namespace="System.Configuration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="side" runat="Server">
 <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -28,9 +29,12 @@
             <%{ %>
     <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Manage Rights</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Manage Rights</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <div class="content-module-main cf">
             </div>
             <table style="padding: inherit; border-spacing: inherit; caption-side: inherit; empty-cells: inherit;"
@@ -88,7 +92,7 @@
                 <%w = ""; %>
                 <%} %>
                 <%int i = 1; %>
-                <% string s = "select project_registration.proj_name,project_registration.proj_location,project_registration.proj_user_name,rights.user_name,rights.view_r,rights.insert_r,rights.update_r,rights.delete_r,rights.user_type from project_registration left join rights on project_registration.proj_regi_id=rights.project_id where rights.user_id='" + w + "' and rights.project_id='" + s1 + "' "; %>
+                <% string s = "select project_registration.proj_name,project_registration.proj_location,project_registration.proj_user_name,rights.user_name,rights.view_r,rights.insert_r,rights.update_r,rights.delete_r,rights.user_type from project_registration left join rights on project_registration.proj_regi_id=rights.project_id where rights.user_id='" + w + "' and rights.project_id='" + s1 + "'"; %>
                 <%String strConnString = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString; %>
                 <%SqlConnection con = new SqlConnection(strConnString); %>
                 <% con.Open(); %>

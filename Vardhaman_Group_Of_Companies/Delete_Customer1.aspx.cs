@@ -16,7 +16,7 @@ public partial class Delete_Customer1 : System.Web.UI.Page
     static string val44;
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        ledger.Focus();
         if (Session["project_id"] != null)
         {
             val = Session["project_id"].ToString() + "_customer";
@@ -97,7 +97,15 @@ public partial class Delete_Customer1 : System.Web.UI.Page
                     txtcomment.InnerText = dr.GetString(37);
                 }
                 dr.Close();
-               
+                string strquery1 = "select ledger_name from  "+val44+"  where id='" + a + "'";
+                SqlDataReader dr1;
+                SqlCommand cmd1 = new SqlCommand(strquery1, con1);
+                dr1 = cmd1.ExecuteReader();
+                while (dr1.Read())
+                {
+                    ledger.Text = dr1.GetString(0);
+                }
+                dr1.Close();
             }
         }   
     }

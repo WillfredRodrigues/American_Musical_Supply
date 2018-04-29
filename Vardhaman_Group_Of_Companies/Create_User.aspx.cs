@@ -109,7 +109,7 @@ public partial class Create_User : System.Web.UI.Page
         dr.Close();
         if (bp == txtusername.Text.ToLower())
         {
-            Response.Write("<script>alert('User ID Has  Been Taken');</script>");
+            Response.Write("<script>alert('User Has  Been Taken');</script>");
         }
         else
         {
@@ -117,14 +117,14 @@ public partial class Create_User : System.Web.UI.Page
                        .ConnectionStrings["conString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
-            string strq11 = "insert into User_Management values('" + Session["main_admin_id"].ToString() + "','" + Session["main_admin_name"].ToString() + "','" + txtusername.Text + "', '" + txtuserfullname.Text + "','" + txtuserpassword.Text + "','" + status.SelectedItem.Text + "','" + sp + "','"+DateTime.Now+"','','" + type.SelectedItem.Text + "','')";
+            string strq11 = "insert into User_Management values('" + Session["main_admin_id"].ToString() + "','" + Session["main_admin_name"].ToString() + "','" + txtusername.Text + "', '" + txtuserfullname.Text + "','" + txtuserpassword.Text + "','" + status.SelectedItem.Text + "','" + sp + "','" + DateTime.Now + "','','" + type.SelectedItem.Text + "','')";
             SqlCommand cmd111 = new SqlCommand(strq11, con);
             SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
             DataSet ds11 = new DataSet();
             da11.Fill(ds11, "User_Management");
 
 
-            string strq1 = "insert into rights values('" + sp + "','" + type.SelectedItem.Text + "','" + txtusername.Text + "','" + s + "','" + s1 + "','" + s2 + "','" + s3 + "','','','" + txtuserfullname.Text + "')";
+            string strq1 = "insert into rights values('" + sp + "','" + type.SelectedItem.Text + "','" + txtusername.Text + "','" + s + "','" + s1 + "','" + s2 + "','" + s3 + "','" + DateTime.Now + "','','" + txtuserfullname.Text + "')";
             SqlCommand cmd11 = new SqlCommand(strq1, con);
             SqlDataAdapter da1 = new SqlDataAdapter(cmd11);
             DataSet ds1 = new DataSet();

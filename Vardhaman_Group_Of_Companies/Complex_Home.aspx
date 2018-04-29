@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true"
     CodeFile="Complex_Home.aspx.cs" Inherits="Complex_Home" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
@@ -9,7 +9,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" runat="Server">
     <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -28,9 +29,12 @@
             <%{ %>
     <div class="side-content fr">
         <div class="content-module">
-            <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u> Complex Information</u></b></font></center></div>
-        <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
             
@@ -138,7 +142,7 @@
                         </th>
                     </tr>
                     <%int i = 1; %>
-                    <% string s5 = "select " + val + ".wing," + val + ".flat_floor," + val + ".flat_no," + val + ".flat_type," + val + ".flat_area,coalesce(" + val1 + ".cust_name,'-')as cust,coalesce(" + val1 + ".cust_booking_date,'')as date, coalesce(  " + val1 + ".total,'') as tot,coalesce(" + val1 + ".paid,' ')as paid,coalesce(" + val1 + ".balance,' ')as bal from " + val + " left join " + val1 + " on " + val + ".cust_id=" + val1 + ".cust_id group by  " + val + ".wing, " + val + ".flat_floor, " + val + ".flat_no, " + val + ".flat_type, " + val + ".flat_area, " + val1 + ".cust_name," + val1 + ".cust_booking_date," + val1 + ".total," + val1 + ".paid," + val1 + ".balance  order by " + val + ".wing asc, " + val + ".flat_floor asc," + val + ".flat_no asc ";%>
+                    <% string s5 = "select " + val + ".wing," + val + ".flat_floor," + val + ".flat_no," + val + ".flat_type," + val + ".flat_area,coalesce(" + val1 + ".cust_name,'-')as cust,coalesce(" + val1 + ".cust_booking_date,'-')as date, coalesce(  " + val1 + ".total,'') as tot,coalesce(" + val1 + ".paid,' ')as paid,coalesce(" + val1 + ".balance,' ')as bal from " + val + " left join " + val1 + " on " + val + ".cust_id=" + val1 + ".cust_id group by  " + val + ".wing, " + val + ".flat_floor, " + val + ".flat_no, " + val + ".flat_type, " + val + ".flat_area, " + val1 + ".cust_name," + val1 + ".cust_booking_date," + val1 + ".total," + val1 + ".paid," + val1 + ".balance  order by " + val + ".wing asc, " + val + ".flat_floor asc," + val + ".flat_no asc ";%>
                     <%String strConnString = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString; %>
                     <%SqlConnection con = new SqlConnection(strConnString); %>
                     <% con.Open(); %>
@@ -149,7 +153,7 @@
                     <%{ %>
                     <tr>
                         <td>
-                            <%=i%>
+                            <%=i %>
                         </td>
                         <td>
                             <%Response.Write(dr.GetString(0));%>
@@ -170,13 +174,7 @@
                             <%Response.Write(dr.GetString(5));%>
                         </td>
                         <td>
-                        <%if (dr.GetValue(6).ToString() == "") %>
-                        <%{
-                              Response.Write("-");
-                          } %>
-                        <%{ %>
-                            <%Response.Write(dr.GetValue(6).ToString());%>
-                            <%} %>
+                            <%Response.Write(dr.GetString(6));%>
                         </td>
                         <td>
                             <%if (dr.GetValue(7).ToString() == "0.0000") %>
@@ -184,7 +182,7 @@
                             -
                             <%} %>
                             <%else
-                        { %>
+                                { %>
                             <%Response.Write(dr.GetValue(7));%>
                             <%} %>
                         </td>
@@ -194,7 +192,7 @@
                             -
                             <%} %>
                             <%else
-                        { %>
+                                { %>
                             <%Response.Write(dr.GetValue(8));%>
                             <%} %>
                         </td>
@@ -204,7 +202,7 @@
                             -
                             <%} %>
                             <%else
-                        { %>
+                                { %>
                             <%Response.Write(dr.GetValue(9));%>
                             <%} %>
                         </td>
@@ -214,7 +212,7 @@
                             Unsold
                             <%} %>
                             <%else
-                        { %>
+                                { %>
                             sold
                             <%} %>
                         </td>

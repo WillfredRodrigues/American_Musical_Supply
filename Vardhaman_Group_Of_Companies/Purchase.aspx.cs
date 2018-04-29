@@ -136,8 +136,8 @@ public partial class Purchase : System.Web.UI.Page
                         SqlCommand cmd3 = new SqlCommand(strq3, con);
                         SqlDataAdapter da3 = new SqlDataAdapter(cmd3);
                         DataSet ds3 = new DataSet();
-                        da3.Fill(ds3, val44);
-                        string strq = "insert into  " + val + "  values('" + g + "','" + txtmname.Text + "','" + txtqty.Text + "','" + txtqtype.Text + "','" + txtrate.Text + "','" + amt.Value + "','" + txtvname.Text + "','" + txtadd.InnerText + "','" + txtmob.Text + "','" + txtpurby.Text + "','','" + amt.Value + "','','','','','" + type.SelectedItem.Text + "','" + txtpdate.Text + "','"+DateTime.Now+"','" + challan.Text + "','" + bill.Text + "','" + txtcomment.InnerText + "')";
+                        da3.Fill(ds3, val45);
+                        string strq = "insert into  " + val + "  values('" + g + "','" + txtmname.Text + "','" + txtqty.Text + "','" + txtqtype.Text + "','" + txtrate.Text + "','" + amt.Value + "','" + txtvname.Text + "','" + txtadd.InnerText + "','" + txtmob.Text + "','" + txtpurby.Text + "','','" + amt.Value + "','','','','','" + type.SelectedItem.Text + "','" + txtpdate.Text + "','" + DateTime.Now + "','" + challan.Text + "','" + bill.Text + "','" + txtcomment.InnerText + "')";
                         SqlCommand cmd11 = new SqlCommand(strq, con);
                         SqlDataAdapter da = new SqlDataAdapter(cmd11);
                         DataSet ds = new DataSet();
@@ -162,14 +162,14 @@ public partial class Purchase : System.Web.UI.Page
                     SqlCommand cmd3 = new SqlCommand(strq3, con);
                     SqlDataAdapter da3 = new SqlDataAdapter(cmd3);
                     DataSet ds3 = new DataSet();
-                    da3.Fill(ds3, val44);
-                    string strq = "insert into  " + val + "  values('" + g + "','" + txtmname.Text + "','" + txtqty.Text + "','" + txtqtype.Text + "','" + txtrate.Text + "','" + amt.Value + "','" + txtvname.Text + "','" + txtadd.InnerText + "','" + txtmob.Text + "','" + txtpurby.Text + "','','" + amt.Value + "','','','','','" + type.SelectedItem.Text + "','" + txtpdate.Text + "','"+DateTime.Now+"','" + challan.Text + "','" + bill.Text + "','" + txtcomment.InnerText + "')";
+                    da3.Fill(ds3, val45);
+                    string strq = "insert into  " + val + "  values('" + g + "','" + txtmname.Text + "','" + txtqty.Text + "','" + txtqtype.Text + "','" + txtrate.Text + "','" + amt.Value + "','" + txtvname.Text + "','" + txtadd.InnerText + "','" + txtmob.Text + "','" + txtpurby.Text + "','','" + amt.Value + "','','','','','" + type.SelectedItem.Text + "','" + txtpdate.Text + "','" + DateTime.Now + "','" + challan.Text + "','" + bill.Text + "','" + txtcomment.InnerText + "')";
                     SqlCommand cmd11 = new SqlCommand(strq, con);
                     SqlDataAdapter da = new SqlDataAdapter(cmd11);
                     DataSet ds = new DataSet();
                     da.Fill(ds, val);
                     con.Close();
-                    Response.Redirect("Purchase.aspx?success=true");
+                    Response.Redirect("Purchase_Home.aspx?success2=true");
 
                 }
             }

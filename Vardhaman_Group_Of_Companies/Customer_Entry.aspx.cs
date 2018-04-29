@@ -301,7 +301,6 @@ public partial class Customer_Entry : System.Web.UI.Page
         Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total1();", true);
         Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot();", true);
         Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "tot1();", true);
-
         int j;
         Random r = new Random();
         j = r.Next();
@@ -311,25 +310,25 @@ public partial class Customer_Entry : System.Web.UI.Page
                            .ConnectionStrings["conString"].ConnectionString;
             SqlConnection con = new SqlConnection(strConnString);
             con.Open();
-            
-            string strq = "insert into " + val1 + " values('" + g + "','" + cname.Value + "','" + txtmob1.Text + "','" + txtmob2.Text + "','" + txtcaddress.InnerText + "','" + txtpaddress.InnerText + "','" + txtemail.Text + "','"+txtbdate.Text+"','" + complex.SelectedItem.Value + "','" + complex.SelectedItem.Text + "','" + building.SelectedItem.Value + "','" + building.SelectedItem.Text + "','" + txtbldgno.Text + "','" + wing.SelectedItem.Text + "','" + floor.SelectedItem.Text + "','" + flatno.SelectedItem.Text + "','" + txtflattype.Text + "','" + txtarea.Text + "','" + txtrate.Text + "','" + txtam.Value + "','" + txtdevchrg.Text + "','" + txtsctchrg.Text + "','" + txtstvat.Text + "','" + txtagree.Text + "','" + txtdocu.Text + "','" + txtmain10.Text + "','" + txtduty.Text + "','" + txtother.Text + "','" + txtam1.Value + "','0','" + txtam1.Value + "','" + av.Text + "','" + hocr.Value + "','" + hem.Value + "','" + loan.Text + "','"+DateTime.Now+"','" + txtcomment.InnerText + "')";
+
+            string strq = "insert into " + val1 + " values('" + g + "','" + cname.Value + "','" + txtmob1.Text + "','" + txtmob2.Text + "','" + txtcaddress.InnerText + "','" + txtpaddress.InnerText + "','" + txtemail.Text + "','" + txtbdate.Text + "','" + complex.SelectedItem.Value + "','" + complex.SelectedItem.Text + "','" + building.SelectedItem.Value + "','" + building.SelectedItem.Text + "','" + txtbldgno.Text + "','" + wing.SelectedItem.Text + "','" + floor.SelectedItem.Text + "','" + flatno.SelectedItem.Text + "','" + txtflattype.Text + "','" + txtarea.Text + "','" + txtrate.Text + "','" + txtam.Value + "','" + txtdevchrg.Text + "','" + txtsctchrg.Text + "','" + txtstvat.Text + "','" + txtagree.Text + "','" + txtdocu.Text + "','" + txtmain10.Text + "','" + txtduty.Text + "','" + txtother.Text + "','" + txtam1.Value + "','0','" + txtam1.Value + "','" + av.Text + "','" + hocr.Value + "','" + hem.Value + "','" + loan.Text + "','" + DateTime.Now + "','" + txtcomment.InnerText + "')";
             SqlCommand cmd1 = new SqlCommand(strq, con);
             SqlDataAdapter da = new SqlDataAdapter(cmd1);
             DataSet ds = new DataSet();
             da.Fill(ds, val1);
-            string strq1 = "insert into  "+val44+"  values('" + g + "','" + cname.Value + "','" + nid.Value + "','" + nname.Value + "','" + val1 + "','Customer','"+txtam1.Value+"','"+mainid.Value+"','"+mainname.Value+"')";
+            string strq1 = "insert into  "+val44+"  values('" + g + "','" + cname.Value + "','" + nid.Value + "','" + nname.Value + "','" + val1 + "','Customer','"+txtam1.Value+"')";
             SqlCommand cmd11 = new SqlCommand(strq1, con);
             SqlDataAdapter da1 = new SqlDataAdapter(cmd11);
             DataSet ds1 = new DataSet();
             da1.Fill(ds1, val44);
-            string strq11 = "update  " + val + "  set cust_id='" + g + "',cust_name='" + cname.Value + "',date='"+DateTime.Now+"' where complex_id='" + complex.SelectedItem.Value + "' and complex_name='" + complex.SelectedItem.Text + "' and building_id='" + building.SelectedItem.Value + "' and building_name='" + building.SelectedItem.Text + "' and building_no='" + txtbldgno.Text + "' and wing='" + wing.SelectedItem.Text + "' and flat_floor='" + floor.SelectedItem.Text + "' and flat_no='" + flatno.SelectedItem.Text + "'";
+            string strq11 = "update  " + val + "  set cust_id='" + g + "',cust_name='" + cname.Value + "',date='" + DateTime.Now + "' where complex_id='" + complex.SelectedItem.Value + "' and complex_name='" + complex.SelectedItem.Text + "' and building_id='" + building.SelectedItem.Value + "' and building_name='" + building.SelectedItem.Text + "' and building_no='" + txtbldgno.Text + "' and wing='" + wing.SelectedItem.Text + "' and flat_floor='" + floor.SelectedItem.Text + "' and flat_no='" + flatno.SelectedItem.Text + "'";
             SqlCommand cmd111 = new SqlCommand(strq11, con);
             SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
             DataSet ds11 = new DataSet();
             da11.Fill(ds11, val);
             con.Close();
             
-            Response.Redirect("Customer_Entry.aspx?success=true");
+            Response.Redirect("Customer.aspx?success3=true");
         }
         
     

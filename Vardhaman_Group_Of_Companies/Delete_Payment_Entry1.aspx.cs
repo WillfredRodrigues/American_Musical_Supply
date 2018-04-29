@@ -13,7 +13,7 @@ public partial class Delete_Payment_Entry1 : System.Web.UI.Page
 {
     public string val, val1, a,type,val3;
     int i1;
-    static string val44, val45, val46,gen,gen1,gen2,ty,ty1;
+    static string val44, val45, val46;
     protected void Page_Load(object sender, EventArgs e)
     {
        
@@ -73,17 +73,7 @@ public partial class Delete_Payment_Entry1 : System.Web.UI.Page
 
                 }
                 dr.Close();
-                string strquery1 = "select main_name from  "+val44+"  where name='"+txtname.Text+"'";
-                SqlDataReader dr1;
-                SqlCommand cmd1 = new SqlCommand(strquery1, con1);
-                dr1 = cmd1.ExecuteReader();
-                while (dr1.Read())
-                {
-                    ty = dr1.GetString(0);
-                   
-
-                }
-                dr1.Close();
+                
             }
         }
     }
@@ -103,19 +93,9 @@ public partial class Delete_Payment_Entry1 : System.Web.UI.Page
 
         }
         dr.Close();
-        string s78 = "select display from ledger where name='" + ty + "'";
-        SqlDataReader dr78;
-        SqlCommand cmd78 = new SqlCommand(s78, con);
-        dr78 = cmd78.ExecuteReader();
-        while (dr78.Read())
+        if (type == "Customer")
         {
-            gen1 = dr78.GetString(0);
-
-        }
-        dr78.Close();
-        if (gen1 == "Liability")
-        {
-            string strq10000 = "update  " + val44 + "  set balance=balance+'" + txtamt.Text + "' where name='" + txtname.Text + "' ";
+            string strq10000 = "update  " + val44 + "  set balance=balance+'" + txtamt.Text + "' where name='" + txtname.Text + "' and type='Customer'";
             SqlCommand cmd10000 = new SqlCommand(strq10000, con);
             SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
             DataSet ds10000 = new DataSet();
@@ -125,7 +105,11 @@ public partial class Delete_Payment_Entry1 : System.Web.UI.Page
             SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
             DataSet ds11 = new DataSet();
             da11.Fill(ds11, val);
-            
+            string strq2 = "update  " + val3 + "_Customer set balance=balance-'" + Convert.ToDouble(txtamt.Text) + "' where cust_name='" + txtname.Text + "'";
+            SqlCommand cmd2 = new SqlCommand(strq2, con);
+            SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+            DataSet ds2 = new DataSet();
+            da2.Fill(ds2, val3 + "_Customer");
             string strq5 = "update "+val46+" set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
             SqlCommand cmd5 = new SqlCommand(strq5, con);
             SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
@@ -133,9 +117,9 @@ public partial class Delete_Payment_Entry1 : System.Web.UI.Page
             da5.Fill(ds5, val46);
             Response.Redirect("Data_Entry_Home.aspx?success3=true");
         }
-        else if (gen1=="Assets")
+        else if (type == "Vendor")
         {
-            string strq10000 = "update  " + val44 + "  set balance=balance-'" + txtamt.Text + "' where name='" + txtname.Text + "' ";
+            string strq10000 = "update  " + val44 + "  set balance=balance+'" + txtamt.Text + "' where name='" + txtname.Text + "' and type='Vendor'";
             SqlCommand cmd10000 = new SqlCommand(strq10000, con);
             SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
             DataSet ds10000 = new DataSet();
@@ -145,7 +129,11 @@ public partial class Delete_Payment_Entry1 : System.Web.UI.Page
             SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
             DataSet ds11 = new DataSet();
             da11.Fill(ds11, val);
-           
+            string strq2 = "update  " + val3 + "_Purchase set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where Vendor_name='" + txtname.Text + "'";
+            SqlCommand cmd2 = new SqlCommand(strq2, con);
+            SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+            DataSet ds2 = new DataSet();
+            da2.Fill(ds2, val3 + "_Purchase");
             string strq5 = "update "+val46+" set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
             SqlCommand cmd5 = new SqlCommand(strq5, con);
             SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
@@ -153,40 +141,19 @@ public partial class Delete_Payment_Entry1 : System.Web.UI.Page
             da5.Fill(ds5, val46);
             Response.Redirect("Data_Entry_Home.aspx?success3=true");
         }
-        else if (gen1 == "Expenses")
+        else
         {
-            string strq10000 = "update  " + val44 + "  set balance=balance-'" + txtamt.Text + "' where name='" + txtname.Text + "' ";
-            SqlCommand cmd10000 = new SqlCommand(strq10000, con);
-            SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
-            DataSet ds10000 = new DataSet();
-            da10000.Fill(ds10000, val44);
             string strq11 = "delete from  " + val + "   where transaction_id='" + a + "'";
             SqlCommand cmd111 = new SqlCommand(strq11, con);
             SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
             DataSet ds11 = new DataSet();
             da11.Fill(ds11, val);
-
-            string strq5 = "update " + val46 + " set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
-            SqlCommand cmd5 = new SqlCommand(strq5, con);
-            SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
-            DataSet ds5 = new DataSet();
-            da5.Fill(ds5, val46);
-            Response.Redirect("Data_Entry_Home.aspx?success3=true");
-        }
-        else if (gen1 == "Income")
-        {
-            string strq10000 = "update  " + val44 + "  set balance=balance+'" + txtamt.Text + "' where name='" + txtname.Text + "' ";
-            SqlCommand cmd10000 = new SqlCommand(strq10000, con);
-            SqlDataAdapter da10000 = new SqlDataAdapter(cmd10000);
-            DataSet ds10000 = new DataSet();
-            da10000.Fill(ds10000, val44);
-            string strq11 = "delete from  " + val + "   where transaction_id='" + a + "'";
-            SqlCommand cmd111 = new SqlCommand(strq11, con);
-            SqlDataAdapter da11 = new SqlDataAdapter(cmd111);
-            DataSet ds11 = new DataSet();
-            da11.Fill(ds11, val);
-
-            string strq5 = "update " + val46 + " set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
+            string strq4 = "update  "+val44+"  set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where name='" + txtname.Text + "'";
+            SqlCommand cmd4 = new SqlCommand(strq4, con);
+            SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
+            DataSet ds4 = new DataSet();
+            da4.Fill(ds4, val44);
+            string strq5 = "update "+val46+" set balance=balance+'" + Convert.ToDouble(txtamt.Text) + "' where ac_name='" + txtacc.Text + "'";
             SqlCommand cmd5 = new SqlCommand(strq5, con);
             SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
             DataSet ds5 = new DataSet();

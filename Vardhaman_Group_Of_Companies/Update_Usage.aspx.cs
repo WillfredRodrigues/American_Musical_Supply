@@ -104,7 +104,8 @@ public partial class Update_Usage : System.Web.UI.Page
 
     protected void btnSub_Click(object sender, EventArgs e)
     {
-       
+        i1 = Convert.ToInt32(i11.Value);
+        mat = mat1.Value;
         String strConnString = System.Configuration.ConfigurationManager
                           .ConnectionStrings["conString"].ConnectionString;
         SqlConnection con = new SqlConnection(strConnString);
@@ -127,18 +128,17 @@ public partial class Update_Usage : System.Web.UI.Page
         }
         else
         {
-            string strq99 = "update  " + val45 + "  set quantity=quantity+'" + i11.Value + "' where name='" + mat1.Value + "'";
-            SqlCommand cmd99 = new SqlCommand(strq99, con);
-            SqlDataAdapter da99 = new SqlDataAdapter(cmd99);
-            DataSet ds99 = new DataSet();
-            da99.Fill(ds99, val45);
-            if (txtmname.Text.ToLower() == mat1.Value)
+            if (txtmname.Text.ToLower() == mat)
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total10();", true);
                 i2 = Convert.ToInt32(txtqty.Text);
 
-                
-               
+                i3 = i1 - i2;
+                string strq2 = "update  "+val45+" set quantity=quantity+'" + i1 + "' where  id='" + bp1.Value + "'";
+                SqlCommand cmd2 = new SqlCommand(strq2, con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2, val45);
                 string strq4 = "update  " + val45 + " set quantity=quantity-'" + i2 + "' where  id='" + bp1.Value + "'";
                 SqlCommand cmd4 = new SqlCommand(strq4, con);
                 SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
@@ -153,8 +153,13 @@ public partial class Update_Usage : System.Web.UI.Page
             }
             else
             {
-               
-               
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total10();", true);
+                i2 = Convert.ToInt32(txtqty.Text);
+                string strq2 = "update  " + val45 + " set quantity=quantity+'" + i1 + "' where id='" + bp1.Value + "'";
+                SqlCommand cmd2 = new SqlCommand(strq2, con);
+                SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+                DataSet ds2 = new DataSet();
+                da2.Fill(ds2, val45);
                 string s11 = "select name from " + val45 + " where name='" + txtmname.Text + "'";
                 SqlDataReader dr11;
                 SqlCommand cmd11 = new SqlCommand(s11, con);
@@ -170,7 +175,7 @@ public partial class Update_Usage : System.Web.UI.Page
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "total10();", true);
                     i2 = Convert.ToInt32(txtqty.Text);
 
-                   
+                    i3 = i2 - i1;
                     string strq22 = "update  " + val45 + " set quantity=quantity-'" + i2 + "' where  name='" + sp2 + "'";
                     SqlCommand cmd22 = new SqlCommand(strq22, con);
                     SqlDataAdapter da22 = new SqlDataAdapter(cmd22);

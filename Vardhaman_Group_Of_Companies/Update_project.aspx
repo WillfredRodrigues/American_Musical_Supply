@@ -1,10 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true"
     CodeFile="Update_project.aspx.cs" Inherits="Update_project" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="side" runat="Server">
     <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
          <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -40,9 +41,12 @@
     </cc1:AutoCompleteExtender>
     <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Update Project Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Add Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
                 <center>
@@ -63,8 +67,6 @@
                                 <asp:TextBox AutoComplete="off" ID="TextBox1" runat="server" AccessKey="P" CssClass=" round"
                                     Width="210px" Height="25px"></asp:TextBox>
                             </td>
-                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-            runat="server" ErrorMessage="Required" ControlToValidate="TextBox1" ForeColor="Red"></asp:RequiredFieldValidator>
                         </tr>
                         <tr>
                             <td style="width: 241px; height: 56px;">
@@ -73,8 +75,6 @@
                             <td style="width: 241px; height: 56px;">
                                 <asp:TextBox AutoComplete="off" ID="TextBox3" runat="server" CssClass=" round" Width="210px"
                                     Height="25px"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="TextBox3" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>

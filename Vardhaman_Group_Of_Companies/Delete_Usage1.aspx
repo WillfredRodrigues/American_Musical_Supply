@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Delete_Usage1.aspx.cs" Inherits="Delete_Usage1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Delete_Usage1.aspx.cs" Inherits="Delete_Usage1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Import Namespace="System.Data" %>
@@ -8,7 +8,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" Runat="Server">
 <div class="side-menu fl">
-        
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -30,9 +31,12 @@
             <%{ %>
 <div class="side-content fr">
         <div class="content-module">
-            <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Delete Usage Information</u></b></font></center></div>
-        <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
                

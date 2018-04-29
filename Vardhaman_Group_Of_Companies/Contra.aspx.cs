@@ -52,14 +52,6 @@ public partial class Contra : System.Web.UI.Page
         {
             Response.Redirect("Login.aspx");
         }
-        if (!IsPostBack)
-        {
-            string stats = Request.QueryString["success"];
-            if (stats != null)
-            {
-                Response.Write("<script>alert('Contra Entry Has Successfully Been Made');</script>");
-            }
-        }
     }
     [System.Web.Script.Services.ScriptMethod()]
     [System.Web.Services.WebMethod]
@@ -190,7 +182,7 @@ public partial class Contra : System.Web.UI.Page
             SqlDataAdapter da5 = new SqlDataAdapter(cmd5);
             DataSet ds5 = new DataSet();
             da5.Fill(ds5, val46);
-            Response.Redirect("Contra.aspx?success=true");
+            Response.Redirect("Data_Entry_Home.aspx?success2=true");
         }
     }
 }

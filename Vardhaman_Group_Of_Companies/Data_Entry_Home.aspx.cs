@@ -12,7 +12,7 @@ using System.Configuration;
 
 public partial class Data_Entry_Home : System.Web.UI.Page
 {
-  public string val, val1, sp, vn, pb, mat, bp, sp1, sp2,val2;
+  public string val, val1, sp, vn, pb, mat, bp, sp1, sp2;
     int i1, i2, i3;
     string h;
     static string h4;
@@ -20,12 +20,10 @@ public partial class Data_Entry_Home : System.Web.UI.Page
     {
         pan1.Visible = true;
         pan2.Visible = false;
-        pan3.Visible = false;
         if (Session["project_id"] != null)
         {
             val = Session["project_id"].ToString() + "_bank_book";
             val1 = Session["project_id"].ToString() + "_contra";
-            val2 = Session["project_id"].ToString() + "_journal";
             h4 = val;
             string val3 = Session["project_id"].ToString();
             string op;
@@ -99,43 +97,12 @@ public partial class Data_Entry_Home : System.Web.UI.Page
             {
                 Response.Write("<script>alert('Contra Entry Has Successfully Been Updated');</script>");
             }
-            string stats14 = Request.QueryString["success14"];
-            if (stats14 != null)
-            {
-                Response.Write("<script>alert('Journal Entry Has Successfully Been Made');</script>");
-            }
-            string stats15 = Request.QueryString["success15"];
-            if (stats15 != null)
-            {
-                Response.Write("<script>alert('Journal Entry Has Successfully Been Updated');</script>");
-            }
-            string stats16 = Request.QueryString["success16"];
-            if (stats16 != null)
-            {
-                Response.Write("<script>alert('Journal Entry Has Successfully Been Deleted');</script>");
-            }
         }
     }
     protected void btnSub_Click(object sender, EventArgs e)
     {
         pan2.Visible = true;
         pan1.Visible = false;
-        pan3.Visible = false;
 
-    }
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        pan3.Visible = true;
-        pan1.Visible = false;
-        pan2.Visible = false;
-    }
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-        pan2.Visible = false;
-        pan3.Visible = false;
-        pan1.Visible = true;
-        from.Text = "";
-        from1.Text = "";
-        to.Text = "";
     }
 }

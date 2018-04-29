@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="ProjectAdmin.aspx.cs" Inherits="ProjectAdmin" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="ProjectAdmin.aspx.cs" Inherits="ProjectAdmin" %>
 
 <asp:Content ContentPlaceHolderID="side" runat="server">
 <div class="side-menu fl">
 				
-				
+				<h3>Quick Links</h3>
                 <ul>
                 
                 <li><a href="dashboard.php" class="active-tab dashboard-tab">Add</a></li>

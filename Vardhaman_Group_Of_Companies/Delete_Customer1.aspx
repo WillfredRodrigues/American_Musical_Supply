@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Delete_Customer1.aspx.cs" Inherits="Delete_Customer1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Delete_Customer1.aspx.cs" Inherits="Delete_Customer1" %>
 
  <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Scripting" runat="server">
@@ -98,7 +98,8 @@
            
         </script>
        <div class="side-menu fl">
-        
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightview"].ToString() == "1") %>
             <%{ %>
@@ -123,64 +124,79 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="main" runat="Server">
 <%if (Session["rightdelete"].ToString() == "1") %>
             <%{ %>
-
+<asp:ScriptManager ID="ScriptManager1" runat="server" 
+EnablePageMethods = "true">
+</asp:ScriptManager>
+<cc1:AutoCompleteExtender ServiceMethod="SearchCustomers" 
+    MinimumPrefixLength="1"
+    CompletionInterval="1" EnableCaching="false" CompletionSetCount="10" 
+    TargetControlID="ledger"
+    ID="AutoCompleteExtender1" runat="server" FirstRowSelected = "false">
+</cc1:AutoCompleteExtender>
 
     <div class="side-content fr" >
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Delete Customer Information</u></b></font></center></div>
-           <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             
             <asp:Panel ID="en" runat="server">
                 <center>
                     <table>
                         <tr>
-                            
+                            <td>
+                                Select Ledger Group:(<a href="#" onclick="SelectName1('AddGroup.aspx'); return false;">Create New Group</a>)
+                            </td>
+                            <td>
+                                <asp:TextBox Enabled="false" ID="ledger" runat="server" ClientIDMode="Static"></asp:TextBox>
+                                <asp:HiddenField ID="ledgerid" runat="server" ClientIDMode="Static" />
+                                <asp:HiddenField ID="ledstatus" runat="server" ClientIDMode="Static" />
+                            </td>
                             <td>
                                 Complex name:
                             </td>
                             <td>
                                 <asp:TextBox Enabled="false" ID="cn" runat="server" ></asp:TextBox>
                             </td>
-                        
+                        </tr>
+                        <tr>
                             <td>
                                 Building Name:
                             </td>
                             <td>
                                <asp:TextBox Enabled="false" ID="bn" runat="server" ></asp:TextBox>
                             </td>
-                            </tr>
-                        <tr>
                             <td>
                                 Building No:
                             </td>
                             <td>
                                 <asp:TextBox Enabled="false" AutoComplete="off" ID="txtbldgno" runat="server" class="round" ReadOnly="true"></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Wing:
                             </td>
                             <td>
                                <asp:TextBox Enabled="false" ID="wing" runat="server" ></asp:TextBox>
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Flat Floor:
                             </td>
                             <td>
                                 <asp:TextBox Enabled="false" ID="ff" runat="server" ></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Flat No:
                             </td>
                             <td>
                                 <asp:TextBox Enabled="false" ID="fn" runat="server" ></asp:TextBox>
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Flat Type:
                             </td>
@@ -188,7 +204,8 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtflattype"
                                     runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Flat Area:
                             </td>
@@ -196,8 +213,6 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtarea"
                                     runat="server" ReadOnly="true"></asp:TextBox>
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Rate:
                             </td>
@@ -205,7 +220,8 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtrate"
                                     runat="server" ></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Amount:
                             </td>
@@ -214,8 +230,6 @@
                                     runat="server" ></asp:TextBox>
                                     <asp:HiddenField ID="txtam" runat="server" />
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Booking Date:
                             </td>
@@ -223,7 +237,8 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtbdate"
                                     runat="server" ></asp:TextBox>
                             </td>
-                        
+                        </tr>
+                        <tr>
                             <td>
                                 Name:
                             </td>
@@ -231,17 +246,15 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtname"
                                     runat="server" ClientIDMode="Static"></asp:TextBox>
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Mobile No(1):
                             </td>
-                           
                             <td>
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmob1"
                                     runat="server"></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Mobile(2):<br />
                                 (optional)
@@ -250,8 +263,6 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmob2"
                                     runat="server"></asp:TextBox>
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Email:
                             </td>
@@ -259,16 +270,14 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtemail"
                                     runat="server"></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Current Address:
                             </td>
-                             
                             <td>
                                 <textarea Disabled="true" id="txtcaddress" runat="server" style="width: 180px; height: 25px"></textarea>
                             </td>
-                            </tr>
-                        <tr>
                             <td>
                                 Permanent address:
                             </td>
@@ -276,17 +285,15 @@
                                 <textarea Disabled="true" id="txtpaddress" runat="server" style="width: 180px; height: 25px"></textarea><br />
                                 
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Development Charge:
                             </td>
-                            
                             <td>
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtdevchrg"
                                     runat="server" onchange="total2()"></asp:TextBox>
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Society Charge:
                             </td>
@@ -294,7 +301,8 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtsctchrg"
                                     runat="server" onchange="total2()"></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Stvat:
                             </td>
@@ -302,15 +310,15 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtstvat"
                                     runat="server" onchange="total2()"></asp:TextBox>
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Agreement Charge:
                             </td>
                             <td>
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtagree"
                                     runat="server" onchange="total2()"></asp:TextBox>
-                        
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 Document Charge:
                             </td>
@@ -318,9 +326,6 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtdocu"
                                     runat="server" onchange="total2()"></asp:TextBox>
                             </td>
-                                </td>
-                        </tr>
-                        <tr>
                             <td>
                                 Maintainence:
                             </td>
@@ -328,7 +333,8 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmain10"
                                     runat="server" onchange="total2()"></asp:TextBox>
                             </td>
-                        
+                        </tr>
+                        <tr>
                             <td>
                                 Stamp Duty:
                             </td>
@@ -336,8 +342,6 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtduty"
                                     runat="server" onchange="total2()"></asp:TextBox>
                             </td>
-                            </tr>
-                        <tr>
                             <td>
                                 Other:
                             </td>
@@ -345,7 +349,8 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtother"
                                     runat="server" onchange="total2()"></asp:TextBox>
                             </td>
-                       
+                        </tr>
+                        <tr>
                             <td>
                                 Total:
                             </td>
@@ -354,8 +359,6 @@
                                     runat="server" ReadOnly="true" ></asp:TextBox>
                                     <asp:HiddenField ID="txtam1" runat="server" />
                             </td>
-                             </tr>
-                        <tr>
                             <td>
                                 Paid:
                             </td>
@@ -363,18 +366,16 @@
                                 <asp:TextBox Enabled="false" AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="TextBox1"
                                     runat="server" onchange="total10()"></asp:TextBox>
                             </td>
-                        
+                        </tr>
+                        <tr>
                             <td>
                                 Balance:
                             </td>
-
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="TextBox2"
                                     runat="server" ReadOnly="true" Enabled="false"></asp:TextBox>
                                     <asp:HiddenField ID="txtam2" runat="server" />
                             </td>
-                            </tr>
-                        <tr>
                             <td>
                                 Aggrement Value:
                             </td>
@@ -383,7 +384,8 @@
                                     runat="server" ReadOnly="true" Enabled="false"></asp:TextBox>
                                     <asp:HiddenField ID="hav" runat="server" />
                             </td>
-                            
+                            </tr>
+                            <tr>
                             <td>
                                 OCR:
                             </td>
@@ -392,8 +394,6 @@
                                     runat="server" ReadOnly="true" Enabled="false"></asp:TextBox>
                                     <asp:HiddenField ID="HiddenField1" runat="server" />
                             </td>
-                            </tr>
-                            <tr>
                             <td>
                                 Em:
                             </td>
@@ -402,7 +402,8 @@
                                     runat="server" ReadOnly="true" Enabled="false"></asp:TextBox>
                                     <asp:HiddenField ID="HiddenField2" runat="server" />
                             </td>
-                            
+                            </tr>
+                            <tr>
                              <td>
                                 Loan:
                             </td>
@@ -411,8 +412,6 @@
                                     runat="server" ReadOnly="true" Enabled="false"></asp:TextBox>
                                     <asp:HiddenField ID="HiddenField3" runat="server" />
                             </td>
-                            </tr>
-                            <tr>
                             <td>
                                 Comment:
                             </td>

@@ -93,7 +93,7 @@ public partial class Update_User : System.Web.UI.Page
         {
             c3 = "0";
         }
-        string strQuery = "update user_management set type='" + type.SelectedItem.Text + "', user_name='" + txtuserfullname.Text + "',password='" + txtuserpassword.Text + "', user_status='" + status.SelectedItem.Text + "',user_updated_date='' where user_id ='" + DropDownList1.Text + "'";
+        string strQuery = "update user_management set type='" + type.SelectedItem.Text + "', user_name='" + txtuserfullname.Text + "',password='" + txtuserpassword.Text + "', user_status='" + status.SelectedItem.Text + "',user_updated_date='" + DateTime.Now + "' where user_id ='" + DropDownList1.Text + "'";
         String strConnString = System.Configuration.ConfigurationManager
                    .ConnectionStrings["conString"].ConnectionString;
         SqlConnection con = new SqlConnection(strConnString);

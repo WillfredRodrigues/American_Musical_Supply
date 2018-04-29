@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Delete_Purchase.aspx.cs" Inherits="Delete_Purchase" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Delete_Purchase.aspx.cs" Inherits="Delete_Purchase" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="side" runat="Server">
@@ -31,20 +31,20 @@
     
     </script>
     <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
-         <%if (Session["rightView"].ToString() == "1") %>
+        <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
-           <li><a href="Data_Entry_Home.aspx" class="active-tab dashboard-tab">Day Book</a></li>
+            <li><a href="Purchase.aspx" class="active-tab dashboard-tab">Create Purchase</a></li>
             <%} %>
-            <%if (Session["rightinsert"].ToString() == "1") %>
+            <%if (Session["rightupdate"].ToString() == "1") %>
             <%{ %>
-            <li><a href="Purchase_Home.aspx" class="purchase-tab">Purchase</a></li>
-             <li><a href="Sales_Home.aspx" class="purchase-tab">Sales</a></li>
-            <li><a href="Payment_Entry.aspx" class="active-tab dashboard-tab">Payment</a></li>
-            <li><a href="Receipt_Entry.aspx" class="active-tab dashboard-tab">Receipt</a></li>
-            <li><a href="Contra.aspx" class="active-tab dashboard-tab">Contra</a></li>
-            <li><a href="Journal.aspx" class="active-tab dashboard-tab">Journal</a></li>
+            <li><a href="Update_Purchase1.aspx" class="active-tab dashboard-tab">Update Purchase</a></li>
+            <%} %>
+            <%if (Session["rightdelete"].ToString() == "1") %>
+            <%{ %>
+            <li><a href="Delete_Purchase1.aspx" class="active-tab dashboard-tab">Delete Purchase</a></li>
             <%} %>
         </ul>
     </div>
@@ -54,9 +54,12 @@
             <%{ %>
     <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Delete Purchase Information</u></b></font></center></div>
-          <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <asp:Panel ID="en" runat="server" ClientIDMode="Static">
                 <center>
                     <table>
@@ -107,7 +110,8 @@
                                     <asp:HiddenField ID="amt" runat="server" />
                             </td>
                             <td>
-                                Vendor Name:
+                                Vendor Name:(<a href="#" onclick="SelectName('Add_Ledger.aspx?id=txtvname&id1=<%=val %>&id2=Vendor'); return false;">Create
+                                    New</a>)
                             </td>
                             <td>
                                 <asp:TextBox Enabled="false"  AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtvname"
@@ -120,7 +124,7 @@
                                 Vendor Address:
                             </td>
                             <td>
-                                <textarea id="txtadd" runat="server" cssclass=" round" width="180px" height="25px" disabled="disabled"></textarea>
+                                <textarea id="txtadd" runat="server" cssclass=" round" width="180px" height="25px"></textarea>
                             </td>
                             <td>
                                 Vendor Mobile:
@@ -132,7 +136,8 @@
                         </tr>
                         <tr>
                             <td>
-                                Purchased By:
+                                Purchased By:(<a href="#" onclick="SelectName('Add_Ledger.aspx?id=txtpurby&id1=<%=val %>&id2=Purchaser'); return false;">Create
+                                    New</a>)
                             </td>
                             <td>
                                 <asp:TextBox Enabled="false"  AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtpurby"
@@ -148,7 +153,7 @@
                                 Type Of Purchase:
                             </td>
                             <td>
-                                <asp:DropDownList ID="type" runat="server" CssClass=" round" Width="180px" Height="25px" Enabled="false">
+                                <asp:DropDownList ID="type" runat="server" CssClass=" round" Width="180px" Height="25px">
                                     <asp:ListItem>Site</asp:ListItem>
                                     <asp:ListItem>Office</asp:ListItem>
                                 </asp:DropDownList>
@@ -182,7 +187,7 @@
                                 Comment:
                             </td>
                             <td>
-                                <textarea id="txtcomment" runat="server" cssclass=" round" width="180px" height="25px" disabled="disabled"></textarea>
+                                <textarea id="txtcomment" runat="server" cssclass=" round" width="180px" height="25px"></textarea>
                             </td>
                         </tr>
                         <tr>

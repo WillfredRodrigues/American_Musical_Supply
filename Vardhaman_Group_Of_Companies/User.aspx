@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="User.aspx.cs" Inherits="User" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="User.aspx.cs" Inherits="User" %>
 
 <asp:Content ContentPlaceHolderID="side" runat="server">
 <div class="side-menu fl">

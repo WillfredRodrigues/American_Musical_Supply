@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Delete_Contra1.aspx.cs" Inherits="Delete_Contra1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Delete_Contra1.aspx.cs" Inherits="Delete_Contra1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Scripting" Runat="Server">
@@ -13,7 +13,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" Runat="Server">
  <div class="side-menu fl">
-                <ul>
+        <h3>
+            Quick Links</h3>
+        <ul>
          <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
             <li><a href="Contra.aspx" class="active-tab dashboard-tab">Create Contra</a></li>
@@ -34,9 +36,12 @@
            
   <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Delete Contra Information</u></b></font></center></div>
-           <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
               

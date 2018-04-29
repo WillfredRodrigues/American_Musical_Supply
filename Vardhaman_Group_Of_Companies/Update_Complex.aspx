@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Update_Complex.aspx.cs" Inherits="Update_Complex" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Update_Complex.aspx.cs" Inherits="Update_Complex" %>
 
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Data.SqlClient" %>
@@ -7,7 +7,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="side" runat="Server">
     <div class="side-menu fl">
-        
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -25,9 +26,12 @@
             <%{ %>
     <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Update Complex Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
                 
@@ -74,7 +78,7 @@
                         </th>
                     </tr>
                     <%int i = 1; %>
-                    <% string s = "select complex_id,complex_name,complex_location,building_id,building_name,wing,flat_floor,flat_no,flat_type,flat_area,cust_name,cust_id from " + val + "  order by complex_name asc,building_name asc, wing asc, flat_floor asc,flat_no asc";%>
+                    <% string s = "select complex_id,complex_name,complex_location,building_id,building_name,wing,flat_floor,flat_no,flat_type,flat_area,cust_name,cust_id from " + val + "";%>
                     <%String strConnString = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString; %>
                     <%SqlConnection con = new SqlConnection(strConnString); %>
                     <% con.Open(); %>

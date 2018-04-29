@@ -34,7 +34,7 @@ public partial class Update_project : System.Web.UI.Page
     protected void submit_Click(object sender, EventArgs e)
     {
         k = Session["pid"].ToString();
-        string strQuery = "update project_registration set proj_name='" + TextBox1.Text + "', proj_location='" + TextBox3.Text + "',proj_updation_date='',proj_status='"+TextBox4.SelectedItem.Text+"' where proj_regi_id ='" + k + "'";
+        string strQuery = "update project_registration set proj_name='" + TextBox1.Text + "', proj_location='" + TextBox3.Text + "',proj_updation_date='" + DateTime.Now + "',proj_status='"+TextBox4.SelectedItem.Text+"' where proj_regi_id ='" + k + "'";
         String strConnString = System.Configuration.ConfigurationManager
                    .ConnectionStrings["conString"].ConnectionString;
         SqlConnection con = new SqlConnection(strConnString);

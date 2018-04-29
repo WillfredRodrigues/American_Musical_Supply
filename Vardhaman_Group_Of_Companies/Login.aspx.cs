@@ -11,20 +11,11 @@ using System.Configuration;
 
 public partial class Login : System.Web.UI.Page
 {
-    string y, er = null, br = null;
+    string y,er=null;
     protected void Page_Load(object sender, EventArgs e)
     {
-        DropDownList1.Focus();
-        if (!IsPostBack)
-        {
-            string y = Request.QueryString["id"];
-            if (y != null)
-            {
-                Session.Abandon();
-                Response.Write("<script>alert('You Have Been Logged Out');</script>");
-            }
-        }
-
+       
+       
     }
     protected void btnlogin_Click(object sender, EventArgs e)
     {
@@ -40,7 +31,7 @@ public partial class Login : System.Web.UI.Page
             {
                 er = er + y.ElementAt(i);
             }
-
+          
         }
         if (type.SelectedIndex == 0)
         {
@@ -94,7 +85,7 @@ public partial class Login : System.Web.UI.Page
                 HttpContext.Current.Session["project_admin_name"] = dr.GetString(3);
                 HttpContext.Current.Session["logged_in"] = "Project Admin:" + Session["project_admin_name"].ToString();
                 HttpContext.Current.Session["menu"] = "2";
-                HttpContext.Current.Session["project_id"] = dr.GetString(4);
+                HttpContext.Current.Session["project_id"] =dr.GetString(4);
                 HttpContext.Current.Session["rightview"] = dr.GetValue(5).ToString();
                 HttpContext.Current.Session["rightinsert"] = dr.GetValue(6).ToString();
                 HttpContext.Current.Session["rightupdate"] = dr.GetValue(7).ToString();
@@ -115,43 +106,14 @@ public partial class Login : System.Web.UI.Page
                 HttpContext.Current.Session["rightdelete"] = dr.GetValue(8).ToString();
             }
         }
-        dr.Close();
         if (txtid.Text == txt1.Text && txtpass.Text == txt2.Text)
         {
-
             if (s1 == 1)
             {
-                if (er != null)
-                {
-                    string y = "select proj_user_name from project_registration where proj_regi_id='" + er + "'";
-                    SqlDataReader dr1;
-                    SqlCommand cmd1 = new SqlCommand(y, con);
-                    dr1 = cmd1.ExecuteReader();
-                    while (dr1.Read())
-                    {
-                        br = dr1.GetString(0);
-                    }
-                    dr1.Close();
-                    if (br == er.ToLower())
-                    {
-                        clear();
-                        Response.Redirect("MainAdmin.aspx");
-                    }
-                    else
-                    {
-                        Response.Write("<script>alert('Wrong Project Selection');</script>");
-                        DropDownList1.Text = "";
-                        DropDownList1.Focus();
-                    }
+                clear();
+                Response.Redirect("MainAdmin.aspx");
 
-                }
-                else
-                {
-                    clear();
-                    Response.Redirect("MainAdmin.aspx");
-                }
             }
-
             else if (s1 == 2)
             {
                 clear();
@@ -165,7 +127,7 @@ public partial class Login : System.Web.UI.Page
         }
         else
         {
-            Response.Write("<script>alert('Wrong Credentails');</script>");
+            MessageBox.Show("WRONG CREDENTIALS");
         }
 
 
@@ -217,7 +179,7 @@ public partial class Login : System.Web.UI.Page
                 {
                     while (sdr.Read())
                     {
-                        customers.Add(sdr["proj_name"].ToString() + " : " + sdr["proj_location"].ToString());
+                        customers.Add(sdr["proj_name"].ToString()+" : "+sdr["proj_location"].ToString());
 
                     }
                 }
@@ -227,5 +189,5 @@ public partial class Login : System.Web.UI.Page
             }
         }
     }
-
+   
 }

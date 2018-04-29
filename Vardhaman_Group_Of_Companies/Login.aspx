@@ -17,7 +17,40 @@
 	<script src="js/lib/jquery.min.js" type="text/javascript"></script>
 	<script src="js/lib/jquery.validate.min.js" type="text/javascript"></script>
 	
-	
+	<script>
+	    /*$.validator.setDefaults({
+	    submitHandler: function() { alert("submitted!"); }
+	    });*/
+
+	    $(document).ready(function () {
+
+	        // validate signup form on keyup and submit
+	        $("#loginform").validate({
+	            rules: {
+	                username: {
+	                    required: true,
+	                    minlength: 3
+	                },
+	                password: {
+	                    required: true,
+	                    minlength: 3
+	                }
+	            },
+	            messages: {
+	                username: {
+	                    required: "Please enter a username",
+	                    minlength: "Your username must consist of at least 3 characters"
+	                },
+	                password: {
+	                    required: "Please provide a password",
+	                    minlength: "Your password must be at least 3 characters long"
+	                }
+	            }
+	        });
+
+	    });
+
+	</script>
 
 	<!-- Optimize for mobile devices -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
@@ -60,7 +93,7 @@
 
 	</div> <!-- end header -->
 	<br />
-        <center><h1 style="font-family: Georgia;     font-weight: bold; font-size:30px; color: #0060BF">ABC Group Of Companies</h1>
+        <center><h1 style="font-family: Georgia;     font-weight: bold; font-size:30px; color: #0060BF">Vardhaman Group Of Companies</h1>
 		</center>
 	<!-- MAIN CONTENT -->
     <br />
@@ -132,7 +165,7 @@ EnablePageMethods = "true">
 	<!-- FOOTER -->
 	<div id="footer">
     <h4 style="font-family: Georgia;     font-weight: bold; font-size:15px; color: #0060BF">
-©2015 Copyright. All rights reserved.
+©2014 Clarus World Academy LLP. All rights reserved.
 
 
 	</div> <!-- end footer -->

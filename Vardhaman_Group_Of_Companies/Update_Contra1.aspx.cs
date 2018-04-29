@@ -76,7 +76,7 @@ public partial class Update_Contra1 : System.Web.UI.Page
                     txtchkddno.Text = dr.GetString(6);
                     txtchkdddate.Text = dr.GetString(7);
                     txtbn.Text = dr.GetString(8);
-                  
+                    txtaccbal.Text = dr.GetValue(11).ToString();
                     txtnara.InnerText = dr.GetString(12);
                     txtdesc.InnerText = dr.GetString(13);
 
@@ -143,7 +143,7 @@ public partial class Update_Contra1 : System.Web.UI.Page
         dr = cmd.ExecuteReader();
         while (dr.Read())
         {
-            txtbal.Text = dr.GetValue(0).ToString();
+            txtaccbal.Text = dr.GetValue(0).ToString();
 
         }
         dr.Close();
@@ -240,7 +240,7 @@ public partial class Update_Contra1 : System.Web.UI.Page
         if (c1 != txtname.Text)
         {
             Response.Write("<script>alert('Not Valid Account Name')</script>");
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "SelectName('Add_Ledger.aspx?id=txtname&id1=" + val + "&id2=Contra');", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "SelectName('Add_Ledger.aspx?id=txtname&id1=" + val + "&id2=Payment');", true);
         }
         else if (c2 != txtacc.Text)
         {
@@ -256,7 +256,7 @@ public partial class Update_Contra1 : System.Web.UI.Page
                 SqlCommand cmd7 = new SqlCommand(strq7, con);
                 SqlDataAdapter da7 = new SqlDataAdapter(cmd7);
                 DataSet ds7 = new DataSet();
-                da7.Fill(ds7, val46);
+                da7.Fill(ds7, val44);
                 string strq9 = "update " + val46 + " set balance=balance+'" + Convert.ToDouble(y2.Value) + "' where ac_name='" + x1.Value + "'";
                 SqlCommand cmd9 = new SqlCommand(strq9, con);
                 SqlDataAdapter da9 = new SqlDataAdapter(cmd9);
@@ -285,11 +285,6 @@ public partial class Update_Contra1 : System.Web.UI.Page
                 SqlDataAdapter da11 = new SqlDataAdapter(cmd11);
                 DataSet ds11 = new DataSet();
                 da11.Fill(ds11, val46);
-                string strq12 = "update " + val + " set date='" + txtdate.Text + "',account='" + txtacc.Text + "',name='" + txtname.Text + "',amount='" + txtamt.Text + "',chk_no='" + txtchkddno.Text + "',chk_date='" + txtchkdddate.Text + "',bank_name='" + txtname.Text + "',credit='',debit='',balance='" + ba + "',narration='" + txtnara.InnerText + "',description='" + txtdesc.InnerText + "',type='Contra' where pay_id='"+a+"'";
-                SqlCommand cmd12 = new SqlCommand(strq12, con);
-                SqlDataAdapter da12 = new SqlDataAdapter(cmd12);
-                DataSet ds12 = new DataSet();
-                da12.Fill(ds12, val);
                 Response.Redirect("Data_Entry_Home.aspx?success13=true");
           
 

@@ -11,20 +11,15 @@
             var name = document.getElementById('txt1').value;
             var c = document.getElementById('hf').value;
             var c1 = document.getElementById('txt').value;
-            var c2 = document.getElementById('mainid1').value;
-            var c3 = document.getElementById('mainname1').value;
             var text = document.getElementById('<%=txttt.ClientID %>').value;
             var text1 = document.getElementById('<%=txttt1.ClientID %>').value;
             var text2 = document.getElementById('<%=txttt2.ClientID %>').value;
             var text3 = document.getElementById('<%=gf1.ClientID %>').value;
-            var text4 = document.getElementById('<%=tp1.ClientID %>').value;
-            var text5 = document.getElementById('<%=tp2.ClientID %>').value;
             window.opener.document.getElementById(text).value = name;
             window.opener.document.getElementById(text3).value = name;
-            window.opener.document.getElementById(text1).value = c;
+            window.opener.document.getElementById(text1).value = c
             window.opener.document.getElementById(text2).value = c1;
-            window.opener.document.getElementById(text4).value = c2;
-            window.opener.document.getElementById(text5).value = c3;
+
             window.close()
 
         }
@@ -58,21 +53,12 @@ EnablePageMethods = "true">
                   <asp:HiddenField ID="txttt2" runat="server" ClientIDMode="Static" />
                   <asp:HiddenField ID="hf" runat="server" ClientIDMode="Static" />
                   <asp:HiddenField ID="gf1" runat="server" ClientIDMode="Static" />
-                   <asp:HiddenField ID="mainid1" runat="server" ClientIDMode="Static" />
-                  <asp:HiddenField ID="mainname1" runat="server" ClientIDMode="Static" />
-                <asp:HiddenField ID="tp" runat="server" ClientIDMode="Static" />
-                  <asp:HiddenField ID="tp1" runat="server" ClientIDMode="Static" />
-                    <asp:HiddenField ID="tp2" runat="server" ClientIDMode="Static" />
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txt1" ForeColor="Red"></asp:RequiredFieldValidator>
-
             </td>
         </tr>
         <tr><td>Select Sub Group:&nbsp;</td>
         <td><asp:TextBox ID="txt" runat="server"
-                ClientIDMode="Static"></asp:TextBox> <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ControlToValidate="txt" ForeColor="Red"></asp:RequiredFieldValidator></td></tr>
-     <tr><td>&nbsp;</td></tr>
+                ClientIDMode="Static"></asp:TextBox></td></tr>
+     <tr><td colspan="2"><p style="color:Red; text-transform:capitalize">If no sub group is selected,the new group will be considered as master group</p></td></tr>
         <tr>
             <td colspan="2">
                 <center>

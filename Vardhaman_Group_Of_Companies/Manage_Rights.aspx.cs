@@ -54,7 +54,7 @@ public partial class Manage_Rights : System.Web.UI.Page
         {
             s3 = "0";
         }
-        string strQuery = "update rights set view_r='" + s + "',insert_r='" + s1 + "',update_r='" + s2 + "',delete_r='" + s3 + "',right__update_date='' where project_id='" + Request.QueryString["id"].ToString() + "' and user_id='" + Request.QueryString["id1"].ToString() + "' ";
+        string strQuery = "update rights set view_r='" + s + "',insert_r='" + s1 + "',update_r='" + s2 + "',delete_r='" + s3 + "',right__update_date='" + DateTime.Now + "' where project_id='" + Request.QueryString["id"].ToString() + "' and user_id='" + Request.QueryString["id1"].ToString() + "' ";
         String strConnString = System.Configuration.ConfigurationManager
                    .ConnectionStrings["conString"].ConnectionString;
         SqlConnection con = new SqlConnection(strConnString);

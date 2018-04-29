@@ -61,7 +61,7 @@ public partial class Delete_User : System.Web.UI.Page
     }
     protected void submit_Click(object sender, EventArgs e)
     {
-        string strQuery = "update user_management set  user_status='Disabled',deletion_date='' where user_id ='" + DropDownList1.Text + "'";
+        string strQuery = "update user_management set  user_status='Disabled',deletion_date='" + DateTime.Now + "' where user_id ='" + DropDownList1.Text + "'";
         String strConnString = System.Configuration.ConfigurationManager
                    .ConnectionStrings["conString"].ConnectionString;
         SqlConnection con = new SqlConnection(strConnString);

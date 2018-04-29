@@ -39,6 +39,9 @@ public partial class Interface : System.Web.UI.MasterPage
         panuser.Visible = false;
         panmainadmin.Visible = false;
     }
-   
-   
+    protected void logout_Click(object sender, EventArgs e)
+    {
+        Session.Abandon();
+        Response.Redirect("Login.aspx");
+    }
 }

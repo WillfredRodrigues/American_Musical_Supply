@@ -31,28 +31,17 @@ EnablePageMethods = "true">
     TargetControlID="txt"
     ID="AutoCompleteExtender1" runat="server" FirstRowSelected = "false">
 </cc1:AutoCompleteExtender>
-<cc1:AutoCompleteExtender ServiceMethod="SearchCustomers2" 
-    MinimumPrefixLength="1"
-    CompletionInterval="1" EnableCaching="false" CompletionSetCount="10" 
-    TargetControlID="txt1"
-    ID="AutoCompleteExtender2" runat="server" FirstRowSelected = "false">
-</cc1:AutoCompleteExtender>
     <table><tr><td>
                 New Group:&nbsp;&nbsp;
             </td>
             <td>
-                <asp:TextBox  Text="" ID="txt1" runat="server" AutoComplete="off"></asp:TextBox>
+                <asp:TextBox  Text="" ID="txt1" runat="server" ClientIDMode="Static" AutoComplete="off"></asp:TextBox>
                 <asp:HiddenField ID="txttt" runat="server" />
-                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txt1" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr><td>Select Sub Group:&nbsp;</td>
         <td><asp:TextBox ID="txt" runat="server"></asp:TextBox></td></tr>
-     <tr><td colspan="2"><p style="color:Red; text-transform:capitalize">If no sub group is selected,the new group will be considered as primary group</p></td></tr>
-     <tr><td colspan="2"><p style="color:Red; text-transform:capitalize">In case of primary group , select where to  show from following dropdown list</p></td></tr>
-        <tr><td>Select Option To Display</td>  <td><asp:DropDownList ID="ddl" runat="server" Width="150px"><asp:ListItem>Liability</asp:ListItem><asp:ListItem>Asset</asp:ListItem><asp:ListItem>Income</asp:ListItem><asp:ListItem>Expense</asp:ListItem></asp:DropDownList></td></tr>
-       <tr><td>&nbsp;</td></tr>
+     <tr><td colspan="2"><p style="color:Red; text-transform:capitalize">If no sub group is selected,the new group will be considered as master group</p></td></tr>
         <tr>
             <td colspan="2">
                 <center>

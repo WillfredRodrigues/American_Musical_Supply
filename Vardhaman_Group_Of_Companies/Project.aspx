@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true"
     CodeFile="Project.aspx.cs" Inherits="Project_Registration" %>
 
 <%@ Import Namespace="System.Data" %>
@@ -6,7 +6,8 @@
 <%@ Import Namespace="System.Configuration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="side" runat="Server">
     <div class="side-menu fl">
-        
+        <h3>
+            Quick Links</h3>
         <ul>
         <%if (Session["rightinsert"].ToString() == "1") %>
             <%{ %>
@@ -35,12 +36,21 @@
     </script>
     <div class="side-content fr">
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Project Information</u></b></font></center></div>
-            <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
             <!-- end content-module-heading -->
             <div class="content-module-main cf">
-               
+                <input name="searchtxt" type="text" class="round my_text_box" placeholder="Search">
+                &nbsp;&nbsp;<input name="Search" type="submit" class="my_button round blue   text-upper"
+                    value="Search">
+                Page per Record<input name="limit" type="text" class="round my_text_box" id="search_limit"
+                    style="margin-left: 5px;" size="3" maxlength="3">
+                <input name="go" type="button" value="Go" class=" round blue my_button  text-upper"
+                    onclick="return confirmLimitSubmit()">
             </div>
             <table style="padding: inherit; border-spacing: inherit; caption-side: inherit; empty-cells: inherit;"
                 border="solid" align="left">
@@ -77,7 +87,7 @@
                     </th>
                 </tr>
                 <%int i = 1; %>
-                <% string s = "select Project_Registration.proj_name,Project_Registration.proj_user_name,Project_Registration.proj_location,COUNT(user_management.type)as g,coalesce((select count(user_management.type) where user_management.type='project admin'),0)as g1,coalesce((select count(user_management.type) where user_management.type='user'),0)as g1,coalesce((select count(user_management.type) where user_management.user_status='active'),0)as g1,coalesce((select count(user_management.type) where user_management.user_status='disabled'),0)as g1,coalesce((select count(user_management.type) where user_management.deletion_date!=''),0)as g1,project_registration.proj_creation_date from Project_Registration left join user_management on Project_Registration.proj_regi_id=user_management.proj_id group by Project_Registration.proj_name,Project_Registration.proj_user_name,Project_Registration.proj_location,user_management.type,user_management.user_status,user_management.deletion_date,project_registration.proj_creation_date order by project_registration.proj_creation_date desc"; %>
+                <% string s = "select Project_Registration.proj_name,Project_Registration.proj_user_name,Project_Registration.proj_location,COUNT(user_management.type)as g,coalesce((select count(user_management.type) where user_management.type='project admin'),0)as g1,coalesce((select count(user_management.type) where user_management.type='user'),0)as g1,coalesce((select count(user_management.type) where user_management.user_status='active'),0)as g1,coalesce((select count(user_management.type) where user_management.user_status='disabled'),0)as g1,coalesce((select count(user_management.type) where user_management.deletion_date!=''),0)as g1 from Project_Registration left join user_management on Project_Registration.proj_regi_id=user_management.proj_id group by Project_Registration.proj_name,Project_Registration.proj_user_name,Project_Registration.proj_location,user_management.type,user_management.user_status,user_management.deletion_date"; %>
                 <%String strConnString = System.Configuration.ConfigurationManager.ConnectionStrings["conString"].ConnectionString; %>
                 <%SqlConnection con = new SqlConnection(strConnString); %>
                 <% con.Open(); %>

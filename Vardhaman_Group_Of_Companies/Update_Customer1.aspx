@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="Interface.master" AutoEventWireup="true" CodeFile="Update_Customer1.aspx.cs" Inherits="Update_Customer1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Interface.master" AutoEventWireup="true" CodeFile="Update_Customer1.aspx.cs" Inherits="Update_Customer1" %>
   <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Scripting" runat="server">
 </asp:Content>
@@ -7,7 +7,7 @@
         <script type="text/javascript">
             function SelectName(url) {
 
-                window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=380,height=150,left=490,top=300');
+                window.open(url, 'Popup', 'toolbar=no,location=no,statusbar=no,menubar=no,resizable=0,width=350,height=200,left=490,top=300');
 
 
             }
@@ -136,7 +136,8 @@
             }
         </script>
        <div class="side-menu fl">
-       
+        <h3>
+            Quick Links</h3>
         <ul>
          <%if (Session["rightview"].ToString() == "1") %>
             <%{ %>
@@ -164,9 +165,13 @@
             <%{ %>
     <div class="side-content fr" >
         <div class="content-module">
-        <div style="margin-top:10px">
-        <center><font color="#153450" size="4px" style="margin-top:10px"><b><u>Update Customer Information</u></b></font></center></div>
-           <br />
+            <div class="content-module-heading cf">
+                <h3 class="fl">
+                    Sales</h3>
+                <span class="fr expand-collapse-text">Click to collapse</span> <span class="fr expand-collapse-text initial-expand">
+                    Click to expand</span>
+            </div>
+            
             <asp:Panel ID="en" runat="server">
                 <center>
                     <table>
@@ -237,8 +242,6 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtflattype"
                                     runat="server" ReadOnly="true"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtflattype" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                         
                         
@@ -248,8 +251,6 @@
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtarea"
                                     runat="server" ReadOnly="true"></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtarea" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             </tr>
                             <tr>
@@ -258,9 +259,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtrate"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtrate" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                         
                         
@@ -279,15 +278,8 @@
                                 Booking Date:
                             </td>
                             <td>
-                               
-         <cc1:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
-        </cc1:ToolkitScriptManager>
-      <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtbdate"
-                                    runat="server" ></asp:TextBox>
-        <cc1:CalendarExtender Format="dd/MM/yyyy" ID="CalendarExtender1" TargetControlID="txtbdate" runat="server">
-        </cc1:CalendarExtender>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtbdate" ForeColor="Red"></asp:RequiredFieldValidator>
+                                <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtbdate"
+                                    runat="server"></asp:TextBox>
                             </td>
                        
                             <td>
@@ -300,10 +292,6 @@
                                     <asp:HiddenField id="cname" runat="server" ClientIDMode="Static" />
                                    <asp:HiddenField id="nid" runat="server" ClientIDMode="Static" />
                                    <asp:HiddenField id="nname" runat="server" ClientIDMode="Static" />
-                                    <asp:HiddenField ID="mainid" runat="server" ClientIDMode="Static" />
-                                <asp:HiddenField ID="mainname" runat="server" ClientIDMode="Static" />
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtname" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                              </tr>
                         <tr>
@@ -312,9 +300,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmob1"
-                                    runat="server" ></asp:TextBox>
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtmob1" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    runat="server"></asp:TextBox>
                             </td>
                         
                             <td>
@@ -323,7 +309,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmob2"
-                                    runat="server" ></asp:TextBox>
+                                    runat="server"></asp:TextBox>
                             </td>
                             </tr>
                         <tr>
@@ -340,8 +326,6 @@
                             </td>
                             <td>
                                 <textarea id="txtcaddress" runat="server" style="width: 180px; height: 25px"></textarea>
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7"
-            runat="server" ErrorMessage="Required" ControlToValidate="txtcaddress" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                               </tr>
                         <tr>
@@ -359,7 +343,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtdevchrg"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                              </tr>
                         <tr>
@@ -368,7 +352,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtsctchrg"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                         
                             <td>
@@ -376,7 +360,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtstvat"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                             </tr>
                         <tr>
@@ -385,7 +369,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtagree"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                        
                             <td>
@@ -393,7 +377,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtdocu"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                              </tr>
                         <tr>
@@ -402,7 +386,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtmain10"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                        
                             <td>
@@ -410,7 +394,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtduty"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                              </tr>
                         <tr>
@@ -419,7 +403,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txtother"
-                                    runat="server" onchange="total1()" ></asp:TextBox>
+                                    runat="server" onchange="total1()"></asp:TextBox>
                             </td>
                        
                             <td>
@@ -429,8 +413,6 @@
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="txttotal"
                                     runat="server" ReadOnly="true" Enabled="false"></asp:TextBox>
                                     <asp:HiddenField ID="txtam1" runat="server" />
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8"
-            runat="server" ErrorMessage="Required" ControlToValidate="txttotal" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                              </tr>
                         <tr>
@@ -439,7 +421,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="av"
-                                    runat="server" onchange="tot()" ></asp:TextBox>
+                                    runat="server" onchange="tot()"></asp:TextBox>
                                     <asp:HiddenField ID="hav" runat="server" />
                             </td>
                             
@@ -461,7 +443,7 @@
                             </td>
                             <td>
                                 <asp:TextBox AutoComplete="off" CssClass=" round" Width="180px" Height="25px" ID="loan"
-                                    runat="server" onchange="tot1()" ></asp:TextBox>
+                                    runat="server" onchange="tot1()"></asp:TextBox>
                                     <asp:HiddenField ID="HiddenField3" runat="server" />
                             </td>
                             

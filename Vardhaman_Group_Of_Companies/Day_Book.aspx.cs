@@ -11,7 +11,7 @@ using System.Configuration;
 
 public partial class Day_Book : System.Web.UI.Page
 {
-   public string val, val1, sp, vn, pb, mat, bp, sp1, sp2,val2;
+   public string val, val1, sp, vn, pb, mat, bp, sp1, sp2;
     int i1, i2, i3;
     string h;
     static string h4;
@@ -23,7 +23,6 @@ public partial class Day_Book : System.Web.UI.Page
         {
             val = Session["project_id"].ToString() + "_bank_book";
             val1 = Session["project_id"].ToString() + "_contra";
-            val2 = Session["project_id"].ToString() + "_journal";
             h4 = val;
             string val3 = Session["project_id"].ToString();
             string op;
