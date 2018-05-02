@@ -22,7 +22,7 @@ namespace EngToMorse
             char dot = '.';
             char dash = '-';
 
-            convertor = new Dictionary<char, string>()
+            convertor = new Dictionary<char, string>() //load dictionary with predefined formats
             {
                 {'a', string.Concat(dot, dash)},
                 {'b', string.Concat(dash, dot, dot, dot)},
@@ -87,7 +87,7 @@ namespace EngToMorse
             else
             {
               int count=0;
-              foreach(char character in input)
+              foreach(char character in input) //check for invalid chars not in dictionary 
             {
             
               if(!convertor.ContainsKey(character))
