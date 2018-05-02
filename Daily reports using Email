@@ -1,0 +1,30 @@
+//Namespaces
+
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+
+//Button Click Event
+protected void SendEmail(object sender, EventArgs e)
+{
+    using (MailMessage mm = new MailMessage(txtEmail.Text, txtTo.Text)) // from and to values from text boxes
+    {
+        mm.Subject = txtSubject.Text;
+        mm.Body = txtBody.Text;
+        if (fuAttachment.HasFile) //id of FIleUpload
+        {
+            string FileName = Path.GetFileName(fuAttachment.PostedFile.FileName);
+            mm.Attachments.Add(new Attachment(fuAttachment.PostedFile.InputStream, FileName));
+        }
+        mm.IsBodyHtml = false;
+        SmtpClient smtp = new SmtpClient();
+        smtp.Host = "smtp.gmail.com";
+        smtp.EnableSsl = true;
+        NetworkCredential NetworkCred = new NetworkCredential(txtEmail.Text, txtPassword.Text); //email and password of sender
+        smtp.UseDefaultCredentials = true;
+        smtp.Credentials = NetworkCred;
+        smtp.Port = 587;
+        smtp.Send(mm);
+        ClientScript.RegisterStartupScript(GetType(), "alert", "alert('Email sent.');", true);
+    }
+}
