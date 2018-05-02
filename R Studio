@@ -1,3 +1,0 @@
-library('quantmod')
-getSymbols("AAPL")
-chartSeries(AAPL, subset='last 1 months')
