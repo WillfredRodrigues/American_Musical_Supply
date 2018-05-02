@@ -1,3 +1,3 @@
-library('quantmod')
-getSymbols("AAPL")
-chartSeries(AAPL, subset='last 1 months')
+library('quantmod') //load library
+getSymbols("AAPL") //Yahoo stock symbols for companies...AAPL for Apple
+chartSeries(AAPL, subset='last 1 months')//Ploat Graph
