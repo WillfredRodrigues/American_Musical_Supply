@@ -13,7 +13,7 @@ public partial class _Default : Page
     {
         //Get the Input File Name and Extension.
         string fileName = Path.GetFileNameWithoutExtension(FileUpload1.PostedFile.FileName);
-        string fileExtension = Path.GetExtension(FileUpload1.PostedFile.FileName);
+        string fileExtension = Path.GetExtension(FileUpload1.PostedFile.FileName); //get file name and extension
 
         //Build the File Path for the original (input) and the encrypted (output) file.
         string input = Server.MapPath("~/Files/") + fileName + fileExtension;
